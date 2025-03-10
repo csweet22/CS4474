@@ -326,19 +326,15 @@ namespace Managers
 {
     public class AccountManager : PersistentSingleton<AccountManager>
     {
-        public string DisplayName { get; private set; } = "User";
-        public Texture2D ProfilePicture { get; private set; } = null;
-        public Country Country { get; private set; } = Country.UNDEFINED;
-
-        public void SetName(string newName) => DisplayName = newName;
-        public void SetProfilePicture(Texture2D newPfp) => ProfilePicture = newPfp;
-        public void SetCountry(Country newCountry) => Country = newCountry;
+        public readonly Trackable<string> DisplayName = new("User");
+        public readonly Trackable<Texture2D> ProfilePicture = new(null);
+        public readonly Trackable<Country> UserCountry = new(Country.UNDEFINED);
 
         public void ResetAccount()
         {
-            DisplayName = "User";
-            ProfilePicture = null;
-            Country = Country.UNDEFINED;
+            DisplayName.Value = "User";
+            ProfilePicture.Value = null;
+            UserCountry.Value = Country.UNDEFINED;
             ProgressionManager.Instance.ResetAccountProgress();
         }
     }
