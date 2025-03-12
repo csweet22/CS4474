@@ -1,10 +1,12 @@
 using Scripts.Utilities;
+using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class QuizManager : Singleton<QuizManager>
 {
     [SerializeField] private int numGames;
-    [SerializeField] private Minigame[] gamePrefabs;
+    [SerializeField] private List<Minigame> gamePrefabs;
 
     private Minigame[] _gameSequence;
     private int _currentGameIndex = 0;
@@ -13,10 +15,15 @@ public class QuizManager : Singleton<QuizManager>
 
     private void Start()
     {
+        if (numGames > gamePrefabs.Count)
+            numGames = gamePrefabs.Count;
+
         _gameSequence = new Minigame[numGames];
         for (int i = 0; i < numGames; i++)
         {
-            _gameSequence[i] = gamePrefabs[Random.Range(0, gamePrefabs.Length)];
+            Minigame next = gamePrefabs[Random.Range(0, gamePrefabs.Count)];
+            _gameSequence[i] = next;
+            gamePrefabs.Remove(next);
         }
 
         LoadNextMinigame();
