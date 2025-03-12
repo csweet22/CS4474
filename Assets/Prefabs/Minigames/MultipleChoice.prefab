@@ -1373,7 +1373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835ac6ea495d43346b6b45cc3b52b007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xp: 0
+  xp: 25
   pathToData: MultipleChoice/
   questionText: {fileID: 468647131214430980}
   answerButtons:
