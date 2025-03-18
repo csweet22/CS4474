@@ -13,13 +13,14 @@ public class LineRendererUI : MonoBehaviour
 
 
         Vector2 midpoint = (p1 + p2) / 2f;
-        rectTransform.localPosition = new Vector3(midpoint.x / 2f, midpoint.y / 2f, 0f);
+        rectTransform.localPosition = new Vector3(midpoint.x / transform.parent.localScale.x,
+            midpoint.y / transform.parent.localScale.x, 0f);
 
         Vector2 dir = p1 - p2;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         rectTransform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        rectTransform.sizeDelta = new Vector2(dir.magnitude/2f, width);
+        rectTransform.sizeDelta = new Vector2(dir.magnitude / transform.parent.localScale.x, width);
         rectTransform.localScale = new Vector3(1f, 1f, 1f);
     }
 }
