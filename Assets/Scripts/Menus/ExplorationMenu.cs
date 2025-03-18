@@ -10,11 +10,16 @@ public class ExplorationMenu : ACMenu
     private LineRendererUI _left;
     private LineRendererUI _hypotenuse;
 
+    [SerializeField] private Transform linesRoot;
+
     [SerializeField] private Vector3 bottomLeftVertex = Vector3.zero;
     [SerializeField] private Vector3 rightVertex = Vector3.right * 10f;
     [SerializeField] private Vector3 upVertex = Vector3.up * 10f;
     [SerializeField] private float width = 1.0f;
-    
+    [SerializeField] private Sprite lineSprite;
+
+    [SerializeField] private float bias = 1.0f;
+
     public override void Open()
     {
         base.Open();
@@ -28,9 +33,14 @@ public class ExplorationMenu : ACMenu
         if (!Application.isPlaying)
             return;
 
-        Destroy(_bottom.gameObject);
-        Destroy(_left.gameObject);
-        Destroy(_hypotenuse.gameObject);
+        if (_bottom.gameObject)
+            Destroy(_bottom.gameObject);
+
+        if (_left.gameObject)
+            Destroy(_left.gameObject);
+
+        if (_hypotenuse.gameObject)
+            Destroy(_hypotenuse.gameObject);
 
         _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "BottomLine");
         _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "LeftLine");
@@ -41,18 +51,20 @@ public class ExplorationMenu : ACMenu
     {
         GameObject line = new GameObject(lineName, typeof(RectTransform));
         RectTransform rectTransform = line.GetComponent<RectTransform>();
-        rectTransform.SetParent(transform);
+        rectTransform.SetParent(linesRoot);
         rectTransform.sizeDelta = new Vector2(1, 1);
 
-        RawImage image = line.AddComponent<RawImage>();
+        Image image = line.AddComponent<Image>();
         image.color = color;
+        image.sprite = lineSprite;
+        image.type = Image.Type.Sliced;
         // Set Raw Image
 
 
         LineRendererUI lineRenderer = line.AddComponent<LineRendererUI>();
         lineRenderer.image = image;
         lineRenderer.rectTransform = rectTransform;
-        lineRenderer.CreateLine(start, end, width);
+        lineRenderer.CreateLine(start + (start - end).normalized * bias, end + (end - start).normalized * bias, width);
 
         return lineRenderer;
     }
