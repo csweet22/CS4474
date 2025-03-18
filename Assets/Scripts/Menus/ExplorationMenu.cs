@@ -13,7 +13,8 @@ public class ExplorationMenu : ACMenu
     [SerializeField] private Vector3 bottomLeftVertex = Vector3.zero;
     [SerializeField] private Vector3 rightVertex = Vector3.right * 10f;
     [SerializeField] private Vector3 upVertex = Vector3.up * 10f;
-
+    [SerializeField] private float width = 1.0f;
+    
     public override void Open()
     {
         base.Open();
@@ -51,7 +52,7 @@ public class ExplorationMenu : ACMenu
         LineRendererUI lineRenderer = line.AddComponent<LineRendererUI>();
         lineRenderer.image = image;
         lineRenderer.rectTransform = rectTransform;
-        lineRenderer.CreateLine(start, end);
+        lineRenderer.CreateLine(start, end, width);
 
         return lineRenderer;
     }
