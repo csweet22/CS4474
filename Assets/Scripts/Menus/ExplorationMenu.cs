@@ -27,12 +27,9 @@ public class ExplorationMenu : ACMenu
         if (!Application.isPlaying)
             return;
 
-        if (_bottom)
-            Destroy(_bottom.gameObject);
-        if (_left)
-            Destroy(_left.gameObject);
-        if (_hypotenuse)
-            Destroy(_hypotenuse.gameObject);
+        Destroy(_bottom.gameObject);
+        Destroy(_left.gameObject);
+        Destroy(_hypotenuse.gameObject);
 
         _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "BottomLine");
         _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "LeftLine");
@@ -43,8 +40,8 @@ public class ExplorationMenu : ACMenu
     {
         GameObject line = new GameObject(lineName, typeof(RectTransform));
         RectTransform rectTransform = line.GetComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(5, 5);
         rectTransform.SetParent(transform);
+        rectTransform.sizeDelta = new Vector2(5, 5);
 
         RawImage image = line.AddComponent<RawImage>();
         image.color = color;
