@@ -10,6 +10,10 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public bool dragOnSurfaces = true;
     private RectTransform _rt;
 
+    [SerializeField] private bool freezeX = false;
+    [SerializeField] private bool freezeY = false;
+    [SerializeField] private bool freezeZ = false;
+    
     public event Action<Vector3> onPositionChanged;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -40,8 +44,15 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         var rt = GetComponent<RectTransform>();
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_rt, data.position,
                 data.pressEventCamera, out var globalMousePos)){
-            rt.position = globalMousePos;
-            if (onPositionChanged != null) onPositionChanged.Invoke(rt.position);
+            
+            if(!freezeX)
+                rt.position = rt.position.Change(x: globalMousePos.x);
+            if(!freezeY)
+                rt.position = rt.position.Change(y: globalMousePos.y);
+            if(!freezeZ)
+                rt.position = rt.position.Change(z: globalMousePos.z);
+            
+            if (onPositionChanged != null) onPositionChanged.Invoke(rt.localPosition);
             rt.rotation = _rt.rotation;
         }
     }

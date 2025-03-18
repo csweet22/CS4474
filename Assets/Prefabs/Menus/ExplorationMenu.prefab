@@ -60,6 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragOnSurfaces: 1
+  freezeX: 1
+  freezeY: 0
+  freezeZ: 1
 --- !u!114 &530474042529944230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,6 +368,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragOnSurfaces: 1
+  freezeX: 0
+  freezeY: 1
+  freezeZ: 1
 --- !u!114 &7755828131507455841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,7 +505,7 @@ MonoBehaviour:
   upVertex: {x: -50, y: 50, z: 0}
   width: 10
   lineSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  bias: 5
+  bias: 10
   handleRight: {fileID: 507885087106335319}
   handleUp: {fileID: 1886168857082463244}
 --- !u!222 &5613477575075381516
