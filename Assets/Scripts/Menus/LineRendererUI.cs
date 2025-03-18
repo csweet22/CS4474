@@ -6,7 +6,7 @@ public class LineRendererUI : MonoBehaviour
     public RectTransform rectTransform;
     public RawImage image;
 
-    public void CreateLine(Vector3 startPos, Vector3 endPos)
+    public void CreateLine(Vector3 startPos, Vector3 endPos, float width = 1.0f)
     {
         Vector2 p1 = new Vector2(endPos.x, endPos.y);
         Vector2 p2 = new Vector2(startPos.x, startPos.y);
@@ -20,6 +20,6 @@ public class LineRendererUI : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         rectTransform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        rectTransform.localScale = new Vector3(dir.magnitude, 0.1f, 1f);
+        rectTransform.localScale = new Vector3(dir.magnitude, width, 1f);
     }
 }

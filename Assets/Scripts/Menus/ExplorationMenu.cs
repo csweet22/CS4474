@@ -41,7 +41,7 @@ public class ExplorationMenu : ACMenu
         GameObject line = new GameObject(lineName, typeof(RectTransform));
         RectTransform rectTransform = line.GetComponent<RectTransform>();
         rectTransform.SetParent(transform);
-        rectTransform.sizeDelta = new Vector2(5, 5);
+        rectTransform.sizeDelta = new Vector2(1, 1);
 
         RawImage image = line.AddComponent<RawImage>();
         image.color = color;
