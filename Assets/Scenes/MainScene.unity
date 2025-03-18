@@ -380,7 +380,11 @@ PrefabInstance:
     - target: {fileID: 4957801321358259426, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
       propertyPath: mainMenu
       value: 
-      objectReference: {fileID: 6439909874736326225, guid: 332410c5a0fa284439ee921a243be0ab, type: 3}
+      objectReference: {fileID: 6439909874736326225, guid: 45cc059cee2aa0e4ea2537dcb398d951, type: 3}
+    - target: {fileID: 6368902350760024390, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
     - target: {fileID: 9025610757062863975, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

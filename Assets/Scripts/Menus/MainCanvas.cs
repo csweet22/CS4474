@@ -23,6 +23,7 @@ public class MainCanvas : PersistentSingleton<MainCanvas>
     private void Start()
     {
         _canvas = GetComponent<Canvas>();
+        _canvas.worldCamera = Camera.main;
         if (onStartOpenMainMenu)
             OpenMenu(mainMenu, Vector3.zero, 0.0f);
     }
