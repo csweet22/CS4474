@@ -10,6 +10,8 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     public bool dragOnSurfaces = true;
     private RectTransform _rt;
 
+    public event Action<Vector3> onPositionChanged;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         var canvas = FindInParents<Canvas>(gameObject);
@@ -39,6 +41,7 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_rt, data.position,
                 data.pressEventCamera, out var globalMousePos)){
             rt.position = globalMousePos;
+            if (onPositionChanged != null) onPositionChanged.Invoke(rt.position);
             rt.rotation = _rt.rotation;
         }
     }

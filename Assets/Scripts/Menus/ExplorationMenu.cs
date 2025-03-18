@@ -20,11 +20,44 @@ public class ExplorationMenu : ACMenu
 
     [SerializeField] private float bias = 1.0f;
 
+    [SerializeField] private VertexHandle handleRight;
+    [SerializeField] private VertexHandle handleUp;
+
     public override void Open()
     {
         base.Open();
-        _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "BottomLine");
-        _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "LeftLine");
+        
+        handleRight.transform.localPosition = rightVertex;
+        handleUp.transform.localPosition = upVertex;
+
+        handleRight.onPositionChanged += newPos =>
+        {
+            rightVertex = newPos;
+            GenerateLines();
+        };
+
+        handleUp.onPositionChanged += newPos =>
+        {
+            upVertex = newPos;
+            GenerateLines();
+        };
+
+        GenerateLines();
+    }
+
+    private void GenerateLines()
+    {
+        if (_bottom)
+            Destroy(_bottom.gameObject);
+
+        if (_left)
+            Destroy(_left.gameObject);
+
+        if (_hypotenuse)
+            Destroy(_hypotenuse.gameObject);
+
+        _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "RightLine");
+        _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "UpLine");
         _hypotenuse = CreateLine(upVertex, rightVertex, Color.blue, "Hypotenuse");
     }
 
@@ -33,18 +66,7 @@ public class ExplorationMenu : ACMenu
         if (!Application.isPlaying)
             return;
 
-        if (_bottom.gameObject)
-            Destroy(_bottom.gameObject);
-
-        if (_left.gameObject)
-            Destroy(_left.gameObject);
-
-        if (_hypotenuse.gameObject)
-            Destroy(_hypotenuse.gameObject);
-
-        _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "BottomLine");
-        _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "LeftLine");
-        _hypotenuse = CreateLine(upVertex, rightVertex, Color.blue, "Hypotenuse");
+        GenerateLines();
     }
 
     private LineRendererUI CreateLine(Vector3 start, Vector3 end, Color color, string lineName = "Line")
@@ -64,7 +86,7 @@ public class ExplorationMenu : ACMenu
         LineRendererUI lineRenderer = line.AddComponent<LineRendererUI>();
         lineRenderer.image = image;
         lineRenderer.rectTransform = rectTransform;
-        lineRenderer.CreateLine(start + (start - end).normalized * bias, end + (end - start).normalized * bias, width);
+        lineRenderer.UpdateLine(start + (start - end).normalized * bias, end + (end - start).normalized * bias, width);
 
         return lineRenderer;
     }
