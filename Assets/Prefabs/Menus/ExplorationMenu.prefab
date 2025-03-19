@@ -920,6 +920,8 @@ MonoBehaviour:
   hypoLabel: {fileID: 2952496875546834241}
   rightLabel: {fileID: 142682131024770092}
   upLabel: {fileID: 6853450831043697705}
+  decimalPlaces: 1
+  divisor: 20
 --- !u!222 &5613477575075381516
 CanvasRenderer:
   m_ObjectHideFlags: 0

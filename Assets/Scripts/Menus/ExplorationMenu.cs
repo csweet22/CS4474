@@ -30,6 +30,9 @@ public class ExplorationMenu : ACMenu
     [SerializeField] private TextMeshProUGUI rightLabel;
     [SerializeField] private TextMeshProUGUI upLabel;
 
+    [SerializeField] private int decimalPlaces = 1;
+    [SerializeField] private float divisor = 5f;
+    
     public override void Open()
     {
         base.Open();
@@ -69,15 +72,15 @@ public class ExplorationMenu : ACMenu
 
     private void UpdateLabels()
     {
-        float hypoValue = _hypotenuse.rectTransform.sizeDelta.x / 10f; 
-        hypoLabel.text = hypoValue.ToString("F1");
+        float rightValue = (float)Math.Round(_right.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        rightLabel.text = rightValue.ToString();
+
+        float upValue = (float)Math.Round(_up.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        upLabel.text = upValue.ToString();
+
+        float hypoValue = (float)Math.Round(Mathf.Sqrt((rightValue * rightValue) + (upValue * upValue)), decimalPlaces);
+        hypoLabel.text = hypoValue.ToString();
         hypoLabel.rectTransform.rotation = Quaternion.identity;
-        
-        float rightValue = _right.rectTransform.sizeDelta.x / 10f; 
-        rightLabel.text = rightValue.ToString("F1");
-        
-        float upValue = _up.rectTransform.sizeDelta.x / 10f; 
-        upLabel.text = upValue.ToString("F1");
     }
 
     private void GenerateLines()
@@ -112,6 +115,7 @@ public class ExplorationMenu : ACMenu
             return;
 
         UpdateLines();
+        UpdateLabels();
     }
 
     private LineRendererUI CreateLine(Vector3 start, Vector3 end, Color color, string lineName = "Line")
