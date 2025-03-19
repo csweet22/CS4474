@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ExplorationMenu : ACMenu
 {
-    private LineRendererUI _bottom;
-    private LineRendererUI _left;
+    private LineRendererUI _right;
+    private LineRendererUI _up;
     private LineRendererUI _hypotenuse;
 
     [SerializeField] private Transform linesRoot;
@@ -24,43 +25,85 @@ public class ExplorationMenu : ACMenu
     [SerializeField] private VertexHandle handleUp;
 
     [SerializeField] private Button backButton;
-    
+
+    [SerializeField] private TextMeshProUGUI hypoLabel;
+    [SerializeField] private TextMeshProUGUI rightLabel;
+    [SerializeField] private TextMeshProUGUI upLabel;
+
     public override void Open()
     {
         base.Open();
-        
+
         handleRight.transform.localPosition = rightVertex;
         handleUp.transform.localPosition = upVertex;
 
         handleRight.onPositionChanged += newPos =>
         {
             rightVertex = newPos;
-            GenerateLines();
+            UpdateLines();
+            UpdateLabels();
         };
 
         handleUp.onPositionChanged += newPos =>
         {
             upVertex = newPos;
-            GenerateLines();
+            UpdateLines();
+            UpdateLabels();
         };
 
         GenerateLines();
+        UpdateLines();
+        InitLabels();
+        UpdateLabels();
+    }
+
+    private void InitLabels()
+    {
+        hypoLabel.rectTransform.SetParent(_hypotenuse.rectTransform);
+        rightLabel.rectTransform.SetParent(_right.rectTransform);
+        upLabel.rectTransform.SetParent(_up.rectTransform);
+        hypoLabel.transform.localPosition = Vector3.zero;
+        rightLabel.transform.localPosition = Vector3.zero;
+        upLabel.transform.localPosition = Vector3.zero;
+    }
+
+    private void UpdateLabels()
+    {
+        float hypoValue = _hypotenuse.rectTransform.sizeDelta.x / 10f; 
+        hypoLabel.text = hypoValue.ToString("F1");
+        hypoLabel.rectTransform.rotation = Quaternion.identity;
+        
+        float rightValue = _right.rectTransform.sizeDelta.x / 10f; 
+        rightLabel.text = rightValue.ToString("F1");
+        
+        float upValue = _up.rectTransform.sizeDelta.x / 10f; 
+        upLabel.text = upValue.ToString("F1");
     }
 
     private void GenerateLines()
     {
-        if (_bottom)
-            Destroy(_bottom.gameObject);
+        if (_right)
+            Destroy(_right.gameObject);
 
-        if (_left)
-            Destroy(_left.gameObject);
+        if (_up)
+            Destroy(_up.gameObject);
 
         if (_hypotenuse)
             Destroy(_hypotenuse.gameObject);
 
-        _bottom = CreateLine(bottomLeftVertex, rightVertex, Color.red, "RightLine");
-        _left = CreateLine(bottomLeftVertex, upVertex, Color.green, "UpLine");
+        _right = CreateLine(bottomLeftVertex, rightVertex, Color.red, "RightLine");
+        _up = CreateLine(bottomLeftVertex, upVertex, Color.green, "UpLine");
         _hypotenuse = CreateLine(upVertex, rightVertex, Color.blue, "Hypotenuse");
+    }
+
+    private void UpdateLines()
+    {
+        _right.UpdateLine(bottomLeftVertex + (bottomLeftVertex - rightVertex).normalized * bias,
+            rightVertex + (rightVertex - bottomLeftVertex).normalized * bias, width);
+        _up.UpdateLine(bottomLeftVertex + (bottomLeftVertex - upVertex).normalized * bias,
+            upVertex + (upVertex - bottomLeftVertex).normalized * bias, width);
+        _hypotenuse.UpdateLine(upVertex + (upVertex - rightVertex).normalized * bias,
+            rightVertex + (rightVertex - upVertex).normalized * bias, width);
     }
 
     private void OnValidate()
@@ -68,7 +111,7 @@ public class ExplorationMenu : ACMenu
         if (!Application.isPlaying)
             return;
 
-        GenerateLines();
+        UpdateLines();
     }
 
     private LineRendererUI CreateLine(Vector3 start, Vector3 end, Color color, string lineName = "Line")
@@ -93,6 +136,7 @@ public class ExplorationMenu : ACMenu
         return lineRenderer;
     }
 
+
     public override void Close()
     {
         base.Close();
@@ -107,7 +151,7 @@ public class ExplorationMenu : ACMenu
     {
         MainCanvas.Instance.CloseMenu(1.0f);
     }
-    
+
     private void OnDisable()
     {
         backButton.onClick.RemoveAllListeners();
