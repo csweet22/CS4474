@@ -23,6 +23,8 @@ public class ExplorationMenu : ACMenu
     [SerializeField] private VertexHandle handleRight;
     [SerializeField] private VertexHandle handleUp;
 
+    [SerializeField] private Button backButton;
+    
     public override void Open()
     {
         base.Open();
@@ -94,5 +96,20 @@ public class ExplorationMenu : ACMenu
     public override void Close()
     {
         base.Close();
+    }
+
+    private void OnEnable()
+    {
+        backButton.onClick.AddListener(OnBackClicked);
+    }
+
+    private void OnBackClicked()
+    {
+        MainCanvas.Instance.CloseMenu(1.0f);
+    }
+    
+    private void OnDisable()
+    {
+        backButton.onClick.RemoveAllListeners();
     }
 }

@@ -7,54 +7,32 @@ using UnityEngine.UI;
 
 public class MainMenu : ACMenu
 {
-    [SerializeField] private Button startGameButton;
-    [SerializeField] private Button settingsButton;
-    [SerializeField] private Button quitButton;
-    
-    [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private Button exploreButton;
+    [SerializeField] private GameObject explorerMenu;
 
-    [SerializeField] private string startGameSceneName;
 
     public override void Open()
     {
         base.Open();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public override void Close()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        base.Close();
     }
 
-    // Start is called before the first frame update
     void OnEnable()
     {
-        startGameButton.onClick.AddListener(OnStartGameButtonClicked);
-        settingsButton.onClick.AddListener(OnSettingsClicked);
-        quitButton.onClick.AddListener(OnQuitClicked);
+        exploreButton.onClick.AddListener(OnExploreClicked);
     }
 
-    private void OnQuitClicked()
+    private void OnExploreClicked()
     {
-        Application.Quit();
-    }
-
-    private void OnStartGameButtonClicked()
-    {
-        MainCanvas.Instance.CloseAllMenus();
-        SceneManager.LoadScene(startGameSceneName);
-    }
-
-    private void OnSettingsClicked()
-    {
-        MainCanvas.Instance.OpenMenu(settingsMenu, Vector3.right);
+        MainCanvas.Instance.OpenMenu(explorerMenu, Vector3.up, 1.0f);
     }
 
     private void OnDisable()
     {
-        startGameButton.onClick.RemoveAllListeners();
-        settingsButton.onClick.RemoveAllListeners();
+        exploreButton.onClick.RemoveAllListeners();
     }
 }
