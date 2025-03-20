@@ -58,9 +58,20 @@ public class ExplorationMenu : ACMenu
         };
 
         GenerateLines();
+        
+        GenerateRect(_right, "rightRect", true);
+        GenerateRect(_up, "upRect");
+        GenerateRect(_hypotenuse, "hypoRect");
+        
         UpdateLines();
         InitLabels();
         UpdateLabels();
+        
+
+        UpdateRect(_right);
+        UpdateRect(_up);
+        UpdateRect(_hypotenuse);
+        
     }
 
     private void InitLabels()
@@ -115,16 +126,48 @@ public class ExplorationMenu : ACMenu
         _hypotenuse = CreateLine(upVertex, rightVertex, Color.blue, "Hypotenuse");
     }
 
+    private void GenerateRect(LineRendererUI line, string rectName = "rect", bool flipped = false)
+    {
+        GameObject rect = new GameObject(rectName, typeof(RectTransform));
+        rect.transform.SetParent(line.transform);
+
+        rect.transform.localPosition = Vector3.zero;
+        rect.transform.localRotation = Quaternion.identity;
+        rect.transform.localScale = Vector3.one;
+
+        line.rect = rect;
+
+        rect.AddComponent<Image>();
+        
+        ((RectTransform) rect.transform).pivot = new Vector2(0.5f, flipped ? 1.0f : 0.0f);
+    }
+
+    private void UpdateRect(LineRendererUI line)
+    {
+        GameObject rect = line.rect;
+
+        Image image = rect.GetComponent<Image>();
+        image.color = new Color(line.image.color.r, line.image.color.g, line.image.color.b, 0.5f);
+
+        RectTransform rectTransform = rect.GetComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(line.rectTransform.sizeDelta.x, line.rectTransform.sizeDelta.x);
+    }
+
     private void UpdateLines()
     {
         if (!_right || !_up || !_hypotenuse)
             return;
+
         _right.UpdateLine(bottomLeftVertex + (bottomLeftVertex - rightVertex).normalized * bias,
             rightVertex + (rightVertex - bottomLeftVertex).normalized * bias, width);
         _up.UpdateLine(bottomLeftVertex + (bottomLeftVertex - upVertex).normalized * bias,
             upVertex + (upVertex - bottomLeftVertex).normalized * bias, width);
         _hypotenuse.UpdateLine(upVertex + (upVertex - rightVertex).normalized * bias,
             rightVertex + (rightVertex - upVertex).normalized * bias, width);
+
+        UpdateRect(_right);
+        UpdateRect(_up);
+        UpdateRect(_hypotenuse);
     }
 
     private void OnValidate()

@@ -5,7 +5,8 @@ public class LineRendererUI : MonoBehaviour
 {
     public RectTransform rectTransform;
     public Image image;
-
+    public GameObject rect;
+    
     public void UpdateLine(Vector3 startPos, Vector3 endPos, float width = 1.0f)
     {
         Vector2 p1 = new Vector2(endPos.x, endPos.y);
