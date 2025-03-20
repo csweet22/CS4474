@@ -28,7 +28,7 @@ public class MainCanvas : PersistentSingleton<MainCanvas>
             OpenMenu(mainMenu, Vector3.zero, 0.0f);
     }
 
-    public void OpenMenu(GameObject menuObject, Vector3 slideFrom = new Vector3(), float duration = 0.2f)
+    public void OpenMenu(GameObject menuObject, Vector3 slideFrom = new Vector3(), float duration = 0.5f)
     {
         GameObject instance = Instantiate(menuObject);
 
@@ -78,7 +78,7 @@ public class MainCanvas : PersistentSingleton<MainCanvas>
         _menuStack.Push(menu);
     }
 
-    public void CloseMenu(float duration = 0.2f)
+    public void CloseMenu(float duration = 0.5f)
     {
         if (_menuStack.Count == 0){
             return;

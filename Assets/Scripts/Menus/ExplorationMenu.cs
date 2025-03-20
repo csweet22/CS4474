@@ -153,7 +153,7 @@ public class ExplorationMenu : ACMenu
 
     private void OnBackClicked()
     {
-        MainCanvas.Instance.CloseMenu(1.0f);
+        MainCanvas.Instance.CloseMenu();
     }
 
     private void OnDisable()
