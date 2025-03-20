@@ -32,7 +32,10 @@ public class ExplorationMenu : ACMenu
 
     [SerializeField] private int decimalPlaces = 1;
     [SerializeField] private float divisor = 5f;
-    
+
+
+    [SerializeField] private TextMeshProUGUI pythaLabel;
+
     public override void Open()
     {
         base.Open();
@@ -72,15 +75,22 @@ public class ExplorationMenu : ACMenu
 
     private void UpdateLabels()
     {
-        float rightValue = (float)Math.Round(_right.rectTransform.sizeDelta.x / divisor, decimalPlaces);
-        rightLabel.text = rightValue.ToString();
+        if (!_right || !_up || !_hypotenuse)
+            return;
 
-        float upValue = (float)Math.Round(_up.rectTransform.sizeDelta.x / divisor, decimalPlaces);
-        upLabel.text = upValue.ToString();
+        float rightValue = (float) Math.Round(_right.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        rightLabel.text = rightValue.ToString($"F{decimalPlaces}");
 
-        float hypoValue = (float)Math.Round(Mathf.Sqrt((rightValue * rightValue) + (upValue * upValue)), decimalPlaces);
-        hypoLabel.text = hypoValue.ToString();
+        float upValue = (float) Math.Round(_up.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        upLabel.text = upValue.ToString($"F{decimalPlaces}");
+
+        float hypoValue =
+            (float) Math.Round(Mathf.Sqrt((rightValue * rightValue) + (upValue * upValue)), decimalPlaces);
+        hypoLabel.text = hypoValue.ToString($"F{decimalPlaces}");
         hypoLabel.rectTransform.rotation = Quaternion.identity;
+
+        pythaLabel.text =
+            $"<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>{hypoValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> \n \n";
     }
 
     private void GenerateLines()
@@ -101,6 +111,8 @@ public class ExplorationMenu : ACMenu
 
     private void UpdateLines()
     {
+        if (!_right || !_up || !_hypotenuse)
+            return;
         _right.UpdateLine(bottomLeftVertex + (bottomLeftVertex - rightVertex).normalized * bias,
             rightVertex + (rightVertex - bottomLeftVertex).normalized * bias, width);
         _up.UpdateLine(bottomLeftVertex + (bottomLeftVertex - upVertex).normalized * bias,
