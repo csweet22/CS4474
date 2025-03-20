@@ -89,12 +89,14 @@ public class ExplorationMenu : ACMenu
         hypoLabel.text = hypoValue.ToString($"F{decimalPlaces}");
         hypoLabel.rectTransform.rotation = Quaternion.identity;
 
-        pythaLabel.text = "<color=red>A<sup>2</sup></color> + <color=green>B<sup>2</sup></color> = <color=blue>C<sup>2</sup></color>";
-        
+        pythaLabel.text =
+            "<color=red>A<sup>2</sup></color> + <color=green>B<sup>2</sup></color> = <color=blue>C<sup>2</sup></color>";
+
         pythaLabel.text +=
-            $"\n<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>{hypoValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color>";
+            $"\n<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>" +
+            $"{((rightValue * rightValue) + (upValue * upValue)).ToString($"F{decimalPlaces}")}" + "</color>";
         pythaLabel.text +=
-            $"\n<color=red>{(rightValue * rightValue).ToString($"F{decimalPlaces}")}</color> + <color=green>{(upValue * upValue).ToString($"F{decimalPlaces}")}</color> = <color=blue>{(hypoValue * hypoValue).ToString($"F{decimalPlaces}")}</color>";
+            $"\n \u221a(<color=red>{(rightValue * rightValue).ToString($"F{decimalPlaces}")}</color> + <color=green>{(upValue * upValue).ToString($"F{decimalPlaces}")}</color>) = <color=blue>{hypoValue.ToString($"F{decimalPlaces}")}</color>";
     }
 
     private void GenerateLines()
