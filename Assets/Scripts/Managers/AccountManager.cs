@@ -337,5 +337,20 @@ namespace Managers
             UserCountry.Value = Country.UNDEFINED;
             ProgressionManager.Instance.ResetAccountProgress();
         }
+
+        public void SetDisplayName(string displayName)
+        {
+            DisplayName.Value = displayName;
+        }
+
+        public void SetProfilePicture(Texture2D profilePicture)
+        {
+            ProfilePicture.Value = profilePicture;
+        }
+
+        public void SetUserCountry(Country country)
+        {
+            UserCountry.Value = country;
+        }
     }
 }

@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 610323247679023712}
+  displayNameField: {fileID: 6239361494029471029}
 --- !u!222 &5613477575075381516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -515,6 +516,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
+--- !u!114 &6239361494029471029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7909633638399336473, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
+  m_PrefabInstance: {fileID: 4274483238625701164}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6945450496477862515 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6571087989923575647, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
