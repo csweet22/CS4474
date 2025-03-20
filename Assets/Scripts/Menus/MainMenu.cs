@@ -13,6 +13,9 @@ public class MainMenu : ACMenu
     
     [SerializeField] private Button accountButton;
     [SerializeField] private GameObject accountMenu;
+    
+    [SerializeField] private Button quizButton;
+    [SerializeField] private GameObject quizMenu;
 
 
     public override void Open()
