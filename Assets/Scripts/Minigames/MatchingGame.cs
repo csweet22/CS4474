@@ -11,6 +11,7 @@ public class MatchingGame : Minigame
     [SerializeField] private RectTransform rightContainer;
 
     private MatchingData _data;
+    private bool answerIsCorrect = true;
 
     private readonly Dictionary<string, string> pairs = new();
     private RectTransform selectedLeft = null;
@@ -79,23 +80,12 @@ public class MatchingGame : Minigame
     {
         if (right)
         {
-            if (selectedRight != null)
-            {
-                SetButtonColor(selectedRight, Color.white);
-            }
-
             selectedRight = button;
         }
         else
         {
-            if (selectedLeft != null)
-            {
-                SetButtonColor(selectedLeft, Color.white);
-            }
-
             selectedLeft = button;
         }
-        SetButtonColor(button, Color.green);
 
         CheckPair();
     }
@@ -118,13 +108,18 @@ public class MatchingGame : Minigame
             }
             else
             {
-                // Indicate answer is wrong
+                answerIsCorrect = false;
+
+                SetButtonColor(selectedLeft, Color.red, 1f);
+                SetButtonColor(selectedRight, Color.red, 1f);
             }
+
+            selectedLeft = selectedRight = null;
         }
         else
             Debug.LogError("Could not find pair in dictionary!");
 
         if (pairs.Count == 0)
-            CompleteMinigame(true);
+            CompleteMinigame(answerIsCorrect);
     }
 }

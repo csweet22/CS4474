@@ -9,7 +9,6 @@ public class MultipleChoiceGame : Minigame
     [SerializeField] private RectTransform[] answerButtons;
 
     private MultipleChoiceData _data;
-
     private bool answerIsCorrect = true;
 
     private void Start()
