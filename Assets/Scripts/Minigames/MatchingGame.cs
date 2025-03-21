@@ -75,11 +75,6 @@ public class MatchingGame : Minigame
         }
     }
 
-    private void SetButtonColor(RectTransform button, Color c)
-    {
-        button.GetComponent<Image>().color = c;
-    }
-
     private void SelectButton(RectTransform button, bool right)
     {
         if (right)
@@ -100,7 +95,7 @@ public class MatchingGame : Minigame
 
             selectedLeft = button;
         }
-        SetButtonColor(button, Color.cyan);
+        SetButtonColor(button, Color.green);
 
         CheckPair();
     }

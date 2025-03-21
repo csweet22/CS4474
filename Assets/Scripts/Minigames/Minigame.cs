@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Minigame : MonoBehaviour
 {
@@ -13,5 +12,10 @@ public abstract class Minigame : MonoBehaviour
             Managers.ProgressionManager.Instance.AddXp(xp);
         }
         QuizManager.Instance.LoadNextMinigame();
+    }
+    
+    protected void SetButtonColor(RectTransform button, Color c)
+    {
+        button.GetComponent<Image>().color = c;
     }
 }

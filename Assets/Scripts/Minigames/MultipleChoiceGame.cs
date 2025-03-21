@@ -10,6 +10,8 @@ public class MultipleChoiceGame : Minigame
 
     private MultipleChoiceData _data;
 
+    private bool answerIsCorrect = true;
+
     private void Start()
     {
         MultipleChoiceData[] possibleQuestions = Resources.LoadAll<MultipleChoiceData>(pathToData);
@@ -32,12 +34,26 @@ public class MultipleChoiceGame : Minigame
             button.GetComponentInChildren<TextMeshProUGUI>().text = _data.answers[i];
             if (i == _data.correctAnswerIndex)
             {
-                button.onClick.AddListener(() => CompleteMinigame(true));
+                button.onClick.AddListener(() => SelectButton((RectTransform) button.transform, true));
             }
             else
             {
-                button.GetComponent<Button>().onClick.AddListener(() => CompleteMinigame(false));
+                button.GetComponent<Button>().onClick.AddListener(() => SelectButton((RectTransform)button.transform, false));
             }
+        }
+    }
+
+    private void SelectButton(RectTransform button, bool correct)
+    {
+        if (correct)
+        {
+            SetButtonColor(button, Color.green);
+            CompleteMinigame(answerIsCorrect);
+        }
+        else
+        {
+            SetButtonColor(button, Color.red);
+            answerIsCorrect = false;
         }
     }
 }
