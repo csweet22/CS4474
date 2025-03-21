@@ -15,8 +15,8 @@ public class MainCanvas : PersistentSingleton<MainCanvas>
     private readonly Stack<Vector3> _offsets = new Stack<Vector3>();
 
     private Canvas _canvas;
-    private float Width => _canvas.pixelRect.width;
-    private float Height => _canvas.pixelRect.height;
+    private float Width => ((RectTransform) _canvas.transform).rect.width;
+    private float Height => ((RectTransform) _canvas.transform).rect.height;
 
     [SerializeField] private bool onStartOpenMainMenu = true;
 
