@@ -430,22 +430,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 954608266559103585, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 954608266559103585, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
     - target: {fileID: 2639790289797274592, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
       propertyPath: m_Name
       value: MainCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4957801321358259426, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
-      propertyPath: mainMenu
-      value: 
-      objectReference: {fileID: 6439909874736326225, guid: 0fc92ac480b161f4481bf8d594cca040, type: 3}
     - target: {fileID: 6368902350760024390, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
       propertyPath: m_Camera
       value: 

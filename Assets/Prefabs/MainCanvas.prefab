@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootMenu: {fileID: 1208982885460960037}
-  mainMenu: {fileID: 6439909874736326225, guid: 332410c5a0fa284439ee921a243be0ab, type: 3}
+  mainMenu: {fileID: 6439909874736326225, guid: 0fc92ac480b161f4481bf8d594cca040, type: 3}
   onStartOpenMainMenu: 1
 --- !u!223 &6368902350760024390
 Canvas:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
