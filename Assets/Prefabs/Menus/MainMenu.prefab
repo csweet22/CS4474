@@ -311,6 +311,8 @@ MonoBehaviour:
   exploreMenu: {fileID: 6439909874736326225, guid: 45cc059cee2aa0e4ea2537dcb398d951, type: 3}
   accountButton: {fileID: 6625527956002241660}
   accountMenu: {fileID: 6439909874736326225, guid: 332410c5a0fa284439ee921a243be0ab, type: 3}
+  quizButton: {fileID: 8545819677112145572}
+  quizMenu: {fileID: 3503516659898487117, guid: 0ce13e50c9deed9489c66393106ba50c, type: 3}
 --- !u!222 &5613477575075381516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -644,3 +646,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4300881564074371551, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
   m_PrefabInstance: {fileID: 8767863195136869777}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8545819677112145572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1095901556526207797, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
+  m_PrefabInstance: {fileID: 8767863195136869777}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

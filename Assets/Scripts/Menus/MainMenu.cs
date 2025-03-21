@@ -32,6 +32,7 @@ public class MainMenu : ACMenu
     {
         exploreButton.onClick.AddListener(OnExploreClicked);
         accountButton.onClick.AddListener(OnAccountClicked);
+        quizButton.onClick.AddListener(OnQuizClicked);
     }
 
     private void OnAccountClicked()
@@ -43,10 +44,16 @@ public class MainMenu : ACMenu
     {
         MainCanvas.Instance.OpenMenu(exploreMenu, Vector3.up);
     }
+    
+    private void OnQuizClicked()
+    {
+        MainCanvas.Instance.OpenMenu(quizMenu, Vector3.down);
+    }
 
     private void OnDisable()
     {
         exploreButton.onClick.RemoveAllListeners();
         accountButton.onClick.RemoveAllListeners();
+        quizButton.onClick.RemoveAllListeners();
     }
 }

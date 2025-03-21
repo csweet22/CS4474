@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class QuizManager : Singleton<QuizManager>
+public class QuizManager : PersistentSingleton<QuizManager>
 {
     [SerializeField] private int numGames;
     [SerializeField] private List<Minigame> gamePrefabs;
 
+    private Transform root;
     private Minigame[] _gameSequence;
     private int _currentGameIndex = 0;
 
     public Minigame CurrentGame { get; private set; } = null;
 
-    private void Start()
+    public void StartQuiz(Transform root = null)
     {
+        this.root = root ? root : transform;
+
         if (numGames > gamePrefabs.Count)
             numGames = gamePrefabs.Count;
 
@@ -38,7 +41,7 @@ public class QuizManager : Singleton<QuizManager>
 
         if (_currentGameIndex < numGames)
         {
-            CurrentGame = Instantiate(_gameSequence[_currentGameIndex], transform);
+            CurrentGame = Instantiate(_gameSequence[_currentGameIndex], root);
             _currentGameIndex++;
         }
         else
