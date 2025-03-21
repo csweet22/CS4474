@@ -30,6 +30,10 @@ public class ExplorationMenu : ACMenu
     [SerializeField] private TextMeshProUGUI rightLabel;
     [SerializeField] private TextMeshProUGUI upLabel;
 
+    [SerializeField] private TextMeshProUGUI hypoRectLabel;
+    [SerializeField] private TextMeshProUGUI rightRectLabel;
+    [SerializeField] private TextMeshProUGUI upRectLabel;
+
     [SerializeField] private int decimalPlaces = 1;
     [SerializeField] private float divisor = 5f;
 
@@ -64,7 +68,6 @@ public class ExplorationMenu : ACMenu
         GenerateRect(_hypotenuse, "hypoRect");
         
         UpdateLines();
-        InitLabels();
         UpdateLabels();
         
 
@@ -72,6 +75,7 @@ public class ExplorationMenu : ACMenu
         UpdateRect(_up);
         UpdateRect(_hypotenuse);
         
+        InitLabels();
     }
 
     private void InitLabels()
@@ -100,12 +104,28 @@ public class ExplorationMenu : ACMenu
         hypoLabel.text = hypoValue.ToString($"F{decimalPlaces}");
         hypoLabel.rectTransform.rotation = Quaternion.identity;
 
+        hypoRectLabel.text = Math.Round((hypoValue * hypoValue), decimalPlaces).ToString($"F{decimalPlaces}");
+        rightRectLabel.text = Math.Round((rightValue * rightValue), decimalPlaces).ToString($"F{decimalPlaces}");
+        upRectLabel.text = Math.Round((upValue * upValue), decimalPlaces).ToString($"F{decimalPlaces}");
+        
+        hypoRectLabel.transform.rotation = Quaternion.identity;
+        rightRectLabel.transform.rotation = Quaternion.identity;
+        upRectLabel.transform.rotation = Quaternion.identity;
+        
+        hypoRectLabel.transform.SetParent(_hypotenuse.rect.transform);
+        rightRectLabel.transform.SetParent(_right.rect.transform);
+        upRectLabel.transform.SetParent(_up.rect.transform);
+        
+        hypoRectLabel.transform.localPosition = Vector3.zero.Change(y: _hypotenuse.rectTransform.sizeDelta.x / 2f);
+        rightRectLabel.transform.localPosition = Vector3.zero.Change(y: -_right.rectTransform.sizeDelta.x / 2f);
+        upRectLabel.transform.localPosition = Vector3.zero.Change(y: _up.rectTransform.sizeDelta.x / 2f);
+        
         pythaLabel.text =
             "<color=red>A<sup>2</sup></color> + <color=green>B<sup>2</sup></color> = <color=blue>C<sup>2</sup></color>";
 
         pythaLabel.text +=
             $"\n<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>" +
-            $"{((rightValue * rightValue) + (upValue * upValue)).ToString($"F{decimalPlaces}")}" + "</color>";
+            $"{Math.Round((hypoValue * hypoValue), decimalPlaces).ToString($"F{decimalPlaces}")}" + "</color>";
         pythaLabel.text +=
             $"\n \u221a(<color=red>{(rightValue * rightValue).ToString($"F{decimalPlaces}")}</color> + <color=green>{(upValue * upValue).ToString($"F{decimalPlaces}")}</color>) = <color=blue>{hypoValue.ToString($"F{decimalPlaces}")}</color>";
     }
