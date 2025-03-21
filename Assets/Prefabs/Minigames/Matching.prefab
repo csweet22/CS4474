@@ -313,7 +313,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xp: 50
   pathToData: Matching/
-  buttonPrefab: {fileID: 4300881564074371551, guid: dc9b45325664e2842a79ea7b26b76efc, type: 3}
+  buttonPrefab: {fileID: 841459261317257714, guid: dc9b45325664e2842a79ea7b26b76efc, type: 3}
   leftContainer: {fileID: 3873958285778702589}
   rightContainer: {fileID: 8497134593951793082}
 --- !u!222 &8275437029751438837
