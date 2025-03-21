@@ -15,8 +15,8 @@ MonoBehaviour:
   question: Given a right triangle with side lengths a = 1 and c = 3, what is the
     length of b?
   answers:
-  - 2sqrt(2)
-  - sqrt(2)
+  - "2\u221A2"
+  - "\u221A2"
   - 2
   - 4
   correctAnswerIndex: 0

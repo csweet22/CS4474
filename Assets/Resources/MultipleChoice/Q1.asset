@@ -17,6 +17,6 @@ MonoBehaviour:
   answers:
   - 2
   - 5
-  - sqrt(5)
-  - sqrt(6)
+  - "\u221A5"
+  - "\u221A6"
   correctAnswerIndex: 2
