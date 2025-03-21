@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public static class StaticHelpers
@@ -65,5 +66,14 @@ public static class StaticHelpers
         Debug.DrawLine(p2, p6, Color.gray, delay);
         Debug.DrawLine(p3, p7, Color.green, delay);
         Debug.DrawLine(p4, p8, Color.cyan, delay);
+    }
+
+    public static void ShuffleArray<T>(ref T[] arr)
+    {
+        for (int i = arr.Length-1; i > 0; i--)
+        {
+            int j = Random.Range(0, i);
+            (arr[j], arr[i]) = (arr[i], arr[j]);
+        }
     }
 }

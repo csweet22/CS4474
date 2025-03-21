@@ -47,3 +47,4 @@ MonoBehaviour:
   numGames: 2
   gamePrefabs:
   - {fileID: 238948366882315860, guid: 2443399c5f474894aa4faecc8e27c76f, type: 3}
+  - {fileID: 1251935218614544057, guid: 1d74911eae98c0e43b04ad948f4fce07, type: 3}

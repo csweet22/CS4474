@@ -11,11 +11,7 @@ public abstract class Minigame : MonoBehaviour
         if (isCorrect)
         {
             Managers.ProgressionManager.Instance.AddXp(xp);
-            Debug.Log("Correct answer received!");
         }
-        else
-            Debug.Log("Incorrect answer received!");
-
         QuizManager.Instance.LoadNextMinigame();
     }
 }
