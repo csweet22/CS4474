@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class QuizManager : PersistentSingleton<QuizManager>
 {
     [SerializeField] private int numGames;
-    [SerializeField] private List<Minigame> gamePrefabs;
+    [SerializeField] private Minigame[] gamePrefabs;
 
     private Transform root;
     private Minigame[] _gameSequence;
@@ -18,15 +18,17 @@ public class QuizManager : PersistentSingleton<QuizManager>
     {
         this.root = root ? root : transform;
 
-        if (numGames > gamePrefabs.Count)
-            numGames = gamePrefabs.Count;
+        List<Minigame> possibleGames = new(gamePrefabs);
+
+        if (numGames > possibleGames.Count)
+            numGames = possibleGames.Count;
 
         _gameSequence = new Minigame[numGames];
         for (int i = 0; i < numGames; i++)
         {
-            Minigame next = gamePrefabs[Random.Range(0, gamePrefabs.Count)];
+            Minigame next = possibleGames[Random.Range(0, possibleGames.Count)];
             _gameSequence[i] = next;
-            gamePrefabs.Remove(next);
+            possibleGames.Remove(next);
         }
 
         LoadNextMinigame();
@@ -34,13 +36,13 @@ public class QuizManager : PersistentSingleton<QuizManager>
 
     public void LoadNextMinigame()
     {
-        if (CurrentGame)
-        {
-            Destroy(CurrentGame.gameObject);
-        }
-
         if (_currentGameIndex < numGames)
         {
+            if (CurrentGame)
+            {
+                Destroy(CurrentGame.gameObject);
+            }
+
             CurrentGame = Instantiate(_gameSequence[_currentGameIndex], root);
             _currentGameIndex++;
         }
@@ -52,6 +54,10 @@ public class QuizManager : PersistentSingleton<QuizManager>
 
     private void EndQuiz()
     {
-        Debug.Log("Quiz complete!");
+        root = null;
+        _gameSequence = null;
+        _currentGameIndex = 0;
+
+        MainCanvas.Instance.CloseMenu();
     }   
 }
