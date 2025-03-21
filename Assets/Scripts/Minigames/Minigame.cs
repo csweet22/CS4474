@@ -32,6 +32,8 @@ public abstract class Minigame : MonoBehaviour
         img.color = c;
 
         yield return new WaitForSeconds(delay);
-        img.color = originalColor;
+
+        if (img)
+            img.color = originalColor;
     }
 }
