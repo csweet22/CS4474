@@ -80,11 +80,17 @@ public class MatchingGame : Minigame
     {
         if (right)
         {
+            if (selectedRight)
+                selectedRight.GetComponent<ImageColor>().ResetColor();
+
             selectedRight = button;
             selectedRight.GetComponent<ImageColor>().SetColor(Color.green);
         }
         else
         {
+            if (selectedLeft)
+                selectedLeft.GetComponent<ImageColor>().ResetColor();
+
             selectedLeft = button;
             selectedLeft.GetComponent<ImageColor>().SetColor(Color.green);
         }

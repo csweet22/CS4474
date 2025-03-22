@@ -23,11 +23,19 @@ public class ImageColor : MonoBehaviour
     
     public void SetColor(Color c)
     {
+        if (co != null)
+        {
+            StopCoroutine(co);
+        }
         img.color = c;
     }
 
     public void ResetColor()
     {
+        if (co != null)
+        {
+            StopCoroutine(co);
+        }
         img.color = originalColor;
     }
 
