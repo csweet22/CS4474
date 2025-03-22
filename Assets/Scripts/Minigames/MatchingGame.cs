@@ -84,7 +84,7 @@ public class MatchingGame : Minigame
                 selectedRight.GetComponent<ImageColor>().ResetColor();
 
             selectedRight = button;
-            selectedRight.GetComponent<ImageColor>().SetColor(Color.green);
+            selectedRight.GetComponent<ImageColor>().SetColor(Color.blue);
         }
         else
         {
@@ -92,7 +92,7 @@ public class MatchingGame : Minigame
                 selectedLeft.GetComponent<ImageColor>().ResetColor();
 
             selectedLeft = button;
-            selectedLeft.GetComponent<ImageColor>().SetColor(Color.green);
+            selectedLeft.GetComponent<ImageColor>().SetColor(Color.blue);
         }
 
         CheckPair();
