@@ -81,18 +81,18 @@ public class MatchingGame : Minigame
         if (right)
         {
             if (selectedRight)
-                selectedRight.GetComponent<ImageColor>().ResetColor();
+                selectedRight.GetComponent<CustomButton>().ResetColor();
 
             selectedRight = button;
-            selectedRight.GetComponent<ImageColor>().SetColor(Color.blue);
+            selectedRight.GetComponent<CustomButton>().SetColor(Color.blue);
         }
         else
         {
             if (selectedLeft)
-                selectedLeft.GetComponent<ImageColor>().ResetColor();
+                selectedLeft.GetComponent<CustomButton>().ResetColor();
 
             selectedLeft = button;
-            selectedLeft.GetComponent<ImageColor>().SetColor(Color.blue);
+            selectedLeft.GetComponent<CustomButton>().SetColor(Color.blue);
         }
 
         CheckPair();
@@ -111,15 +111,16 @@ public class MatchingGame : Minigame
             if (rightValue == correctRight)
             {
                 pairs.Remove(leftValue);
-                Destroy(selectedLeft.gameObject);
-                Destroy(selectedRight.gameObject);
+
+                selectedLeft.GetComponent<CustomButton>().SetVisible(false);
+                selectedRight.GetComponent<CustomButton>().SetVisible(false);
             }
             else
             {
                 answerIsCorrect = false;
 
-                selectedLeft.GetComponent<ImageColor>().SetColor(Color.red, 1f);
-                selectedRight.GetComponent<ImageColor>().SetColor(Color.red, 1f);
+                selectedLeft.GetComponent<CustomButton>().SetColor(Color.red, 1f);
+                selectedRight.GetComponent<CustomButton>().SetColor(Color.red, 1f);
             }
 
             selectedLeft = selectedRight = null;

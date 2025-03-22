@@ -1,8 +1,9 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ImageColor : MonoBehaviour
+public class CustomButton : MonoBehaviour
 {
     [SerializeField, Range(0, 1)] private float colorTransitionSpeed = 0.01f;
 
@@ -12,6 +13,9 @@ public class ImageColor : MonoBehaviour
 
     void Start()
     {
+        if (!TryGetComponent(out Button _))
+            Debug.LogWarning("Object is not a button!");
+
         if (TryGetComponent(out Image img))
         {
             this.img = img;
@@ -60,5 +64,18 @@ public class ImageColor : MonoBehaviour
             t += colorTransitionSpeed;
             yield return null;
         }
+    }
+
+    public void SetVisible(bool visible)
+    {
+        img.enabled = visible;
+
+        Button button = GetComponentInChildren<Button>();
+        if (button)
+            button.enabled = visible;
+        
+        TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
+        if (text)
+            text.enabled = visible;
     }
 }
