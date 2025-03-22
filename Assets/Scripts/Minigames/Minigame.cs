@@ -12,7 +12,7 @@ public abstract class Minigame : MonoBehaviour
         {
             Managers.ProgressionManager.Instance.AddXp(xp);
         }
-        QuizManager.Instance.LoadNextMinigame();
+        Managers.QuizManager.Instance.LoadNextMinigame();
     }
     
     protected void SetButtonColor(RectTransform button, Color c)

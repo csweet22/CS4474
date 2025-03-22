@@ -3,61 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class QuizManager : PersistentSingleton<QuizManager>
+namespace Managers
 {
-    [SerializeField] private int numGames;
-    [SerializeField] private Minigame[] gamePrefabs;
-
-    private Transform root;
-    private Minigame[] _gameSequence;
-    private int _currentGameIndex = 0;
-
-    public Minigame CurrentGame { get; private set; } = null;
-
-    public void StartQuiz(Transform root = null)
+    public class QuizManager : PersistentSingleton<QuizManager>
     {
-        this.root = root ? root : transform;
+        [SerializeField] private int numGames;
+        [SerializeField] private Minigame[] gamePrefabs;
 
-        List<Minigame> possibleGames = new(gamePrefabs);
+        private Transform root;
+        private Minigame[] _gameSequence;
+        private int _currentGameIndex = 0;
 
-        if (numGames > possibleGames.Count)
-            numGames = possibleGames.Count;
+        public Minigame CurrentGame { get; private set; } = null;
 
-        _gameSequence = new Minigame[numGames];
-        for (int i = 0; i < numGames; i++)
+        public void StartQuiz(Transform root = null)
         {
-            Minigame next = possibleGames[Random.Range(0, possibleGames.Count)];
-            _gameSequence[i] = next;
-            possibleGames.Remove(next);
-        }
+            this.root = root ? root : transform;
 
-        LoadNextMinigame();
-    }
+            List<Minigame> possibleGames = new(gamePrefabs);
 
-    public void LoadNextMinigame()
-    {
-        if (_currentGameIndex < numGames)
-        {
-            if (CurrentGame)
+            if (numGames > possibleGames.Count)
+                numGames = possibleGames.Count;
+
+            _gameSequence = new Minigame[numGames];
+            for (int i = 0; i < numGames; i++)
             {
-                Destroy(CurrentGame.gameObject);
+                Minigame next = possibleGames[Random.Range(0, possibleGames.Count)];
+                _gameSequence[i] = next;
+                possibleGames.Remove(next);
             }
 
-            CurrentGame = Instantiate(_gameSequence[_currentGameIndex], root);
-            _currentGameIndex++;
+            LoadNextMinigame();
         }
-        else
+
+        public void LoadNextMinigame()
         {
-            EndQuiz();
+            if (_currentGameIndex < numGames)
+            {
+                if (CurrentGame)
+                {
+                    Destroy(CurrentGame.gameObject);
+                }
+
+                CurrentGame = Instantiate(_gameSequence[_currentGameIndex], root);
+                _currentGameIndex++;
+            }
+            else
+            {
+                EndQuiz();
+            }
         }
+
+        private void EndQuiz()
+        {
+            root = null;
+            _gameSequence = null;
+            _currentGameIndex = 0;
+
+            MainCanvas.Instance.CloseMenu();
+        }   
     }
-
-    private void EndQuiz()
-    {
-        root = null;
-        _gameSequence = null;
-        _currentGameIndex = 0;
-
-        MainCanvas.Instance.CloseMenu();
-    }   
 }
