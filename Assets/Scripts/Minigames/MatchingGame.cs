@@ -128,6 +128,6 @@ public class MatchingGame : Minigame
             Debug.LogError("Could not find pair in dictionary!");
 
         if (pairs.Count == 0)
-            CompleteMinigame(answerIsCorrect);
+            CompleteMinigame(answerIsCorrect, 0.5f);
     }
 }

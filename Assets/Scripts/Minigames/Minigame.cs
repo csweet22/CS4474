@@ -4,14 +4,13 @@ using UnityEngine;
 public abstract class Minigame : MonoBehaviour
 {
     [SerializeField] private int xp;
-    private float delay = 0.5f;
     
-    public void CompleteMinigame(bool isCorrect)
+    public void CompleteMinigame(bool isCorrect, float delay = 0f)
     {
-        StartCoroutine(CompleteWithDelay(isCorrect));
+        StartCoroutine(CompleteWithDelay(isCorrect, delay));
     }
 
-    private IEnumerator CompleteWithDelay(bool isCorrect)
+    private IEnumerator CompleteWithDelay(bool isCorrect, float delay)
     {
         yield return new WaitForSeconds(delay);
         
