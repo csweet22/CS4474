@@ -81,10 +81,12 @@ public class MatchingGame : Minigame
         if (right)
         {
             selectedRight = button;
+            selectedRight.GetComponent<ImageColor>().SetColor(Color.green);
         }
         else
         {
             selectedLeft = button;
+            selectedLeft.GetComponent<ImageColor>().SetColor(Color.green);
         }
 
         CheckPair();
@@ -110,8 +112,8 @@ public class MatchingGame : Minigame
             {
                 answerIsCorrect = false;
 
-                SetButtonColor(selectedLeft, Color.red, 1f);
-                SetButtonColor(selectedRight, Color.red, 1f);
+                selectedLeft.GetComponent<ImageColor>().SetColor(Color.red, 1f);
+                selectedRight.GetComponent<ImageColor>().SetColor(Color.red, 1f);
             }
 
             selectedLeft = selectedRight = null;

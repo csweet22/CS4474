@@ -44,14 +44,16 @@ public class MultipleChoiceGame : Minigame
 
     private void SelectButton(RectTransform button, bool correct)
     {
+        ImageColor img = button.GetComponent<ImageColor>();
+
         if (correct)
         {
-            SetButtonColor(button, Color.green);
+            img.SetColor(Color.green);
             CompleteMinigame(answerIsCorrect);
         }
         else
         {
-            SetButtonColor(button, Color.red);
+            img.SetColor(Color.red);
             answerIsCorrect = false;
         }
     }
