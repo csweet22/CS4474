@@ -54,7 +54,7 @@ namespace Managers
             }
         }
 
-        private void EndQuiz()
+        public void EndQuiz()
         {
             root = null;
             _gameSequence = null;
