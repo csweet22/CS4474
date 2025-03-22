@@ -7,6 +7,6 @@ public class QuizMenu : ACMenu
     public override void Open()
     {
         base.Open();
-        QuizManager.Instance.StartQuiz(transform);
+        Managers.QuizManager.Instance.StartQuiz(transform);
     }
 }
