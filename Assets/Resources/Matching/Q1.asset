@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Q1
   m_EditorClassIdentifier: 
   leftItems:
-  - 1, 1
-  - 2, 2
-  - 3, 3
-  - 4, 4
+  - (1, 1)
+  - (2, 2)
+  - (3, 3)
+  - (4, 4)
   rightItems:
   - "\u221A2"
   - "2\u221A2"
