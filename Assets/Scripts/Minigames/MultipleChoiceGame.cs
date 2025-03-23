@@ -49,7 +49,15 @@ public class MultipleChoiceGame : Minigame
         if (correct)
         {
             cb.SetColor(Color.green);
-            CompleteMinigame(answerIsCorrect);
+
+            // Hide other buttons
+            foreach (RectTransform answer in answerButtons)
+            {
+                if (answer != button)
+                    answer.GetComponent<CustomButton>().SetVisible(false);
+            }
+
+            CompleteMinigame(answerIsCorrect, 0.5f);
         }
         else
         {
