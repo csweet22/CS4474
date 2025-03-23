@@ -78,6 +78,7 @@ public class MatchingGame : Minigame
 
     private void SelectButton(RectTransform button, bool right)
     {
+        // Right side button selected
         if (right)
         {
             if (selectedRight)
@@ -86,6 +87,7 @@ public class MatchingGame : Minigame
             selectedRight = button;
             selectedRight.GetComponent<CustomButton>().SetColor(Color.green);
         }
+        // Left side button selected
         else
         {
             if (selectedLeft)
@@ -106,6 +108,7 @@ public class MatchingGame : Minigame
         string leftValue = selectedLeft.GetComponentInChildren<TextMeshProUGUI>().text;
         string rightValue = selectedRight.GetComponentInChildren<TextMeshProUGUI>().text;
 
+        // Get correct pair from dictionary and test button values
         if (pairs.TryGetValue(leftValue, out string correctRight))
         {
             if (rightValue == correctRight)
