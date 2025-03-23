@@ -268,4 +268,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd9be83dc94a6a4a919eb3059deb705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorTransitionSpeed: 0.01
+  colorTransitionSpeed: 0.001
