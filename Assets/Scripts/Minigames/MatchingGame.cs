@@ -84,7 +84,7 @@ public class MatchingGame : Minigame
                 selectedRight.GetComponent<CustomButton>().ResetColor();
 
             selectedRight = button;
-            selectedRight.GetComponent<CustomButton>().SetColor(Color.blue);
+            selectedRight.GetComponent<CustomButton>().SetColor(Color.green);
         }
         else
         {
@@ -92,7 +92,7 @@ public class MatchingGame : Minigame
                 selectedLeft.GetComponent<CustomButton>().ResetColor();
 
             selectedLeft = button;
-            selectedLeft.GetComponent<CustomButton>().SetColor(Color.blue);
+            selectedLeft.GetComponent<CustomButton>().SetColor(Color.green);
         }
 
         CheckPair();
@@ -112,15 +112,15 @@ public class MatchingGame : Minigame
             {
                 pairs.Remove(leftValue);
 
-                selectedLeft.GetComponent<CustomButton>().SetVisible(false);
-                selectedRight.GetComponent<CustomButton>().SetVisible(false);
+                selectedLeft.GetComponent<CustomButton>().SetColor(Color.green, 0.5f, true);
+                selectedRight.GetComponent<CustomButton>().SetColor(Color.green, 0.5f, true);
             }
             else
             {
                 answerIsCorrect = false;
 
-                selectedLeft.GetComponent<CustomButton>().SetColor(Color.red, 1f);
-                selectedRight.GetComponent<CustomButton>().SetColor(Color.red, 1f);
+                selectedLeft.GetComponent<CustomButton>().SetColor(Color.red, 0.5f);
+                selectedRight.GetComponent<CustomButton>().SetColor(Color.red, 0.5f);
             }
 
             selectedLeft = selectedRight = null;

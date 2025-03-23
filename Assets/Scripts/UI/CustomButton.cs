@@ -43,26 +43,38 @@ public class CustomButton : MonoBehaviour
         img.color = originalColor;
     }
 
-    public void SetColor(Color c, float delay)
+    public void SetColor(Color c, float delay, bool hideAfterDelay = false)
     {
         if (co != null)
         {
             StopCoroutine(co);
         }
-        co = StartCoroutine(SetColorWithDelay(c, delay));
+        co = StartCoroutine(SetColorWithDelay(c, delay, hideAfterDelay));
     }
 
-    private IEnumerator SetColorWithDelay(Color c, float delay)
+    private IEnumerator SetColorWithDelay(Color c, float delay, bool hideAfterDelay)
     {
+        if (hideAfterDelay && TryGetComponent(out Button b))
+        {
+            b.enabled = false;
+        }
+
         img.color = c;
         yield return new WaitForSeconds(delay);
 
-        float t = 0;
-        while (img.color != originalColor)
+        if (hideAfterDelay)
         {
-            img.color = Color.Lerp(img.color, originalColor, t);
-            t += colorTransitionSpeed;
-            yield return null;
+            SetVisible(false);
+        }
+        else
+        {
+            float t = 0;
+            while (img.color != originalColor)
+            {
+                img.color = Color.Lerp(img.color, originalColor, t);
+                t += colorTransitionSpeed;
+                yield return null;
+            }
         }
     }
 
