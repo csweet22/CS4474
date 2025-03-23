@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -17,17 +18,30 @@ public class MainMenu : ACMenu
     [SerializeField] private Button quizButton;
     [SerializeField] private GameObject quizMenu;
 
-
+    [SerializeField] private ProgressBar xpBar;
+    
     public override void Open()
     {
         base.Open();
+
+        ProgressionManager.Instance.OnXpGained += (i, i1) =>
+        {
+            xpBar.min.Value = 0;
+            xpBar.max.Value = ProgressionManager.Instance.RequiredXp;
+            xpBar.Progress.Value = ProgressionManager.Instance.Xp;
+        };
+    }
+
+    public override void Returned()
+    {
+        base.Returned();
     }
 
     public override void Close()
     {
         base.Close();
     }
-
+    
     void OnEnable()
     {
         exploreButton.onClick.AddListener(OnExploreClicked);

@@ -13,4 +13,9 @@ public class ACMenu : MonoBehaviour
     {
         transform.localScale = Vector3.zero;
     }
+
+    public virtual void Returned()
+    {
+        
+    }
 }

@@ -103,6 +103,7 @@ public class MainCanvas : PersistentSingleton<MainCanvas>
                 
                 ACMenu newMenu = _menuStack.Peek();
                 newMenu.enabled = true;
+                newMenu.Returned();
             };
         }
     }
