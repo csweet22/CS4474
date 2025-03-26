@@ -9,11 +9,11 @@ public class AccountMenu : ACMenu
 {
     [SerializeField] private Button backButton;
     [SerializeField] private Button resetButton;
-    
+
     [SerializeField] private TMP_InputField displayNameField;
-    
+
     [SerializeField] private GameObject resetConfirmation;
-    
+
     public override void Open()
     {
         base.Open();
@@ -22,13 +22,12 @@ public class AccountMenu : ACMenu
         {
             displayNameField.text = AccountManager.Instance.DisplayName.Value;
         };
-        
+
         displayNameField.text = AccountManager.Instance.DisplayName.Value;
         displayNameField.onValueChanged.AddListener(OnDisplayNameChanged);
         backButton.onClick.AddListener(OnBackClicked);
-        
+
         resetButton.onClick.AddListener(OnResetClicked);
-        
     }
 
     private void OnResetClicked()
@@ -38,6 +37,11 @@ public class AccountMenu : ACMenu
         confirmationPopup.OnConfirm += () =>
         {
             AccountManager.Instance.ResetAccount();
+
+            PFPButton[] buttons = FindObjectsOfType<PFPButton>();
+            foreach (PFPButton pfpButton in buttons){
+                pfpButton.UpdateStatus();
+            }
         };
     }
 

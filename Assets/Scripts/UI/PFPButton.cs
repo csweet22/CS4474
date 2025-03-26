@@ -10,14 +10,21 @@ public class PFPButton : MonoBehaviour
     private Button _button;
 
     public RawImage image;
-    
+
     private void OnEnable()
     {
         _button = GetComponentInChildren<Button>();
         image = GetComponentInChildren<RawImage>();
         _button.onClick.AddListener(OnClick);
-        
-        image.color = AccountManager.Instance.ProfilePicture.Value == (Texture2D)image.texture ? Color.white : Color.gray;
+
+        UpdateStatus();
+    }
+
+    public void UpdateStatus()
+    {
+        image.color = AccountManager.Instance.ProfilePicture.Value == (Texture2D) image.texture
+            ? Color.white
+            : Color.gray;
     }
 
     private void OnClick()
@@ -26,8 +33,9 @@ public class PFPButton : MonoBehaviour
         foreach (PFPButton pfpButton in buttons){
             pfpButton.image.color = Color.gray;
         }
+
         image.color = Color.white;
-        AccountManager.Instance.SetProfilePicture((Texture2D)image.texture);
+        AccountManager.Instance.SetProfilePicture((Texture2D) image.texture);
     }
 
     private void OnDisable()
