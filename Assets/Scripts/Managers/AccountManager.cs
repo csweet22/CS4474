@@ -9,7 +9,7 @@ using UnityEngine.Serialization;
 
 public enum Country
 {
-    [Description("Undefined")] UNDEFINED = 0,
+    [Description("None")] UNDEFINED = 0,
     [Description("Afghanistan")] AF = 1,
     [Description("Åland Islands")] AX = 2,
     [Description("Albania")] AL = 3,

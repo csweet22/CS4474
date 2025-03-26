@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -13,6 +16,8 @@ public class AccountMenu : ACMenu
     [SerializeField] private TMP_InputField displayNameField;
 
     [SerializeField] private GameObject resetConfirmation;
+
+    [SerializeField] private TMP_Dropdown countryDropdown;
 
     public override void Open()
     {
@@ -28,6 +33,34 @@ public class AccountMenu : ACMenu
         backButton.onClick.AddListener(OnBackClicked);
 
         resetButton.onClick.AddListener(OnResetClicked);
+        
+        var countryEnumValues = Enum.GetValues(typeof(Country)).Cast<Country>();
+        var options = new List<TMP_Dropdown.OptionData>();
+        foreach (var country in countryEnumValues){
+            var description = GetEnumDescription(country);
+            options.Add(new TMP_Dropdown.OptionData(description));
+        }
+        countryDropdown.AddOptions(options);
+        countryDropdown.onValueChanged.AddListener(OnCountrySelected);
+        
+        countryDropdown.value = (int)AccountManager.Instance.UserCountry.Value;
+
+        AccountManager.Instance.UserCountry.OnValueChanged += (s, a) =>
+        {
+            countryDropdown.value = (int) AccountManager.Instance.UserCountry.Value;
+        };
+    }
+
+    private void OnCountrySelected(int arg0)
+    {
+        AccountManager.Instance.SetUserCountry((Country)arg0);
+    }
+
+    private string GetEnumDescription(Country country)
+    {
+        var field = country.GetType().GetField(country.ToString());
+        var attribute = (DescriptionAttribute) Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+        return attribute != null ? attribute.Description : country.ToString();
     }
 
     private void OnResetClicked()
