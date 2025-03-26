@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ba22bc65b7ebb4d83ed68ac228a6dc, type: 3}
   m_Name: Q3
   m_EditorClassIdentifier: 
-  question: Given a right triangle with side lengths b = 2 and c = 4, what is the
-    length of a?
+  question: Given a right triangle with side lengths <color=green>b = 2</color> and
+    <color=blue>c = 4</color>, what is the length of <color=red>a</color>?
   answers:
   - "\u221A3"
   - "2\u221A2"
