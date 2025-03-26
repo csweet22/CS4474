@@ -9,7 +9,7 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] public readonly Trackable<float> max = new(1.0f);
     private Slider _slider;
 
-    private void Start()
+    protected virtual void Start()
     {
         _slider = GetComponent<Slider>();
         
@@ -21,19 +21,21 @@ public class ProgressBar : MonoBehaviour
 
         max.OnValueChanged += (oldValue, newValue) => { _slider.maxValue = newValue; };
 
-        Progress.OnValueChanged += (oldValue, newValue) =>
-        {
-            if (newValue > max.Value){
-                Progress.Value = max.Value;
-                return;
-            }
+        Progress.OnValueChanged += ProgressUpdate;
+    }
 
-            if (newValue < min.Value){
-                Progress.Value = min.Value;
-                return;
-            }
+    public void ProgressUpdate(float oldValue, float newValue)
+    {
+        if (newValue > max.Value){
+            Progress.Value = max.Value;
+            return;
+        }
 
-            _slider.value = Progress.Value;
-        };
+        if (newValue < min.Value){
+            Progress.Value = min.Value;
+            return;
+        }
+
+        _slider.value = Progress.Value;
     }
 }

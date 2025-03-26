@@ -17,19 +17,10 @@ public class MainMenu : ACMenu
     
     [SerializeField] private Button quizButton;
     [SerializeField] private GameObject quizMenu;
-
-    [SerializeField] private ProgressBar xpBar;
     
     public override void Open()
     {
         base.Open();
-
-        ProgressionManager.Instance.OnXpGained += (i, i1) =>
-        {
-            xpBar.min.Value = 0;
-            xpBar.max.Value = ProgressionManager.Instance.RequiredXp;
-            xpBar.Progress.Value = ProgressionManager.Instance.Xp;
-        };
     }
 
     public override void Returned()

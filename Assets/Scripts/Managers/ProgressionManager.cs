@@ -22,13 +22,13 @@ namespace Managers
             // This is a while loop in case the overflow is somehow enough to level up again.
             while (Xp >= RequiredXp){
                 Level++;
-
-                // Calculate new amount of Xp needed to level up
-                UpdateRequiredXp(Level);
-
+                
                 // Any additional earned xp is carried over to the next level.
                 int overflow = Xp - RequiredXp;
                 Xp = overflow;
+                
+                // Calculate new amount of Xp needed to level up
+                UpdateRequiredXp(Level);
 
                 OnLevelUp?.Invoke(Level);
             }
