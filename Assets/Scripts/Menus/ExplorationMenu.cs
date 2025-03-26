@@ -121,7 +121,7 @@ public class ExplorationMenu : ACMenu
         upRectLabel.transform.localPosition = Vector3.zero.Change(y: _up.rectTransform.sizeDelta.x / 2f);
         
         pythaLabel.text =
-            "<color=red>A<sup>2</sup></color> + <color=green>B<sup>2</sup></color> = <color=blue>C<sup>2</sup></color>";
+            "<color=red>a<sup>2</sup></color> + <color=green>b<sup>2</sup></color> = <color=blue>c<sup>2</sup></color>";
 
         pythaLabel.text +=
             $"\n<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>" +
