@@ -13,7 +13,9 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private bool freezeX = false;
     [SerializeField] private bool freezeY = false;
     [SerializeField] private bool freezeZ = false;
-    
+
+    [SerializeField] private Transform minPosition, maxPosition;
+
     public event Action<Vector3> onPositionChanged;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -44,14 +46,31 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         var rt = GetComponent<RectTransform>();
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(_rt, data.position,
                 data.pressEventCamera, out var globalMousePos)){
-            
-            if(!freezeX)
+            if (!freezeX)
                 rt.position = rt.position.Change(x: globalMousePos.x);
-            if(!freezeY)
+            if (!freezeY)
                 rt.position = rt.position.Change(y: globalMousePos.y);
-            if(!freezeZ)
+            if (!freezeZ)
                 rt.position = rt.position.Change(z: globalMousePos.z);
-            
+
+            if (minPosition){
+                if (rt.position.x < minPosition.position.x)
+                    rt.position = rt.position.Change(x: minPosition.position.x);
+                if (rt.position.y < minPosition.position.y)
+                    rt.position = rt.position.Change(y: minPosition.position.y);
+                if (rt.position.z < minPosition.position.z)
+                    rt.position = rt.position.Change(z: minPosition.position.z);
+            }
+
+            if (maxPosition){
+                if (rt.position.x > maxPosition.position.x)
+                    rt.position = rt.position.Change(x: maxPosition.position.x);
+                if (rt.position.y > maxPosition.position.y)
+                    rt.position = rt.position.Change(y: maxPosition.position.y);
+                if (rt.position.z > maxPosition.position.z)
+                    rt.position = rt.position.Change(z: maxPosition.position.z);
+            }
+
             if (onPositionChanged != null) onPositionChanged.Invoke(rt.localPosition);
             rt.rotation = _rt.rotation;
         }
