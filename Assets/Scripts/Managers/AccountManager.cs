@@ -5,6 +5,7 @@ using System.ComponentModel;
 using Managers;
 using Scripts.Utilities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum Country
 {
@@ -330,10 +331,17 @@ namespace Managers
         public readonly Trackable<Texture2D> ProfilePicture = new(null);
         public readonly Trackable<Country> UserCountry = new(Country.UNDEFINED);
 
+        [SerializeField] private Texture2D startingPfp;
+
+        private void Start()
+        {
+            SetProfilePicture(startingPfp);
+        }
+
         public void ResetAccount()
         {
             DisplayName.Value = "User";
-            ProfilePicture.Value = null;
+            ProfilePicture.Value = startingPfp;
             UserCountry.Value = Country.UNDEFINED;
             ProgressionManager.Instance.ResetAccountProgress();
         }

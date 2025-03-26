@@ -38,6 +38,11 @@ public class MainMenu : ACMenu
         exploreButton.onClick.AddListener(OnExploreClicked);
         accountButton.onClick.AddListener(OnAccountClicked);
         quizButton.onClick.AddListener(OnQuizClicked);
+
+        AccountManager.Instance.ProfilePicture.OnValueChanged += (texture2D, texture2D1) =>
+        {
+            accountButton.gameObject.GetComponentInChildren<RawImage>().texture = texture2D1;
+        };
     }
 
     private void OnAccountClicked()
