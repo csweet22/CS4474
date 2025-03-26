@@ -127,7 +127,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: (a, b)
+  m_text: (<color=red>a</color>, <color=green>b</color>)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
   m_sharedMaterial: {fileID: -6326953334428982639, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: c
+  m_text: <color=blue>c</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
   m_sharedMaterial: {fileID: -6326953334428982639, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
