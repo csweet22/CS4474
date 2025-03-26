@@ -44,6 +44,9 @@ namespace Managers
         {
             Xp = 0;
             Level = 1;
+            UpdateRequiredXp(Level);
+            OnXpGained?.Invoke(0, Xp);
+            OnLevelUp?.Invoke(Level);
         }
     }
 }

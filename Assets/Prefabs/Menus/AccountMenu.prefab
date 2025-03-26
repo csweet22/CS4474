@@ -868,7 +868,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backButton: {fileID: 610323247679023712}
+  resetButton: {fileID: 1264673653796063196}
   displayNameField: {fileID: 6239361494029471029}
+  resetConfirmation: {fileID: 2166076989739614847, guid: 81ead3bd1fe8b1344849088900968dd4, type: 3}
 --- !u!222 &5613477575075381516
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1274,6 +1276,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
+--- !u!114 &1264673653796063196 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1095901556526207797, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
+  m_PrefabInstance: {fileID: 2213635026799924457}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &2672787056876879158 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4300881564074371551, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
@@ -1296,16 +1309,24 @@ PrefabInstance:
       value: Display Name
       objectReference: {fileID: 0}
     - target: {fileID: 5306100961823978476, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
+      propertyPath: m_fontSize
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306100961823978476, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 5998323090957862893, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
       propertyPath: m_text
       value: Display Name
       objectReference: {fileID: 0}
     - target: {fileID: 5998323090957862893, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
+      propertyPath: m_fontSize
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998323090957862893, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 6571087989923575647, guid: 414b4cdf5637ba6479983bb04a5feee5, type: 3}
       propertyPath: m_Pivot.x
