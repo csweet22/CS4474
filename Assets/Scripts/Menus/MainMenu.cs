@@ -18,6 +18,9 @@ public class MainMenu : ACMenu
     [SerializeField] private Button quizButton;
     [SerializeField] private GameObject quizMenu;
     
+    [SerializeField] private Button timedQuizButton;
+    [SerializeField] private GameObject timedQuizMenu;
+    
     public override void Open()
     {
         base.Open();
@@ -38,6 +41,7 @@ public class MainMenu : ACMenu
         exploreButton.onClick.AddListener(OnExploreClicked);
         accountButton.onClick.AddListener(OnAccountClicked);
         quizButton.onClick.AddListener(OnQuizClicked);
+        timedQuizButton.onClick.AddListener(OnTimedQuizClicked);
 
         AccountManager.Instance.ProfilePicture.OnValueChanged += (texture2D, texture2D1) =>
         {
@@ -59,11 +63,17 @@ public class MainMenu : ACMenu
     {
         MainCanvas.Instance.OpenMenu(quizMenu, Vector3.down);
     }
+    
+    private void OnTimedQuizClicked()
+    {
+        MainCanvas.Instance.OpenMenu(timedQuizMenu, Vector3.down);
+    }
 
     private void OnDisable()
     {
         exploreButton.onClick.RemoveAllListeners();
         accountButton.onClick.RemoveAllListeners();
         quizButton.onClick.RemoveAllListeners();
+        timedQuizButton.onClick.RemoveAllListeners();
     }
 }

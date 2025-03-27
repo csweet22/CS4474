@@ -1,5 +1,4 @@
 using Scripts.Utilities;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -20,17 +19,10 @@ namespace Managers
         {
             this.root = root ? root : transform;
 
-            List<Minigame> possibleGames = new(gamePrefabs);
-
-            if (numGames > possibleGames.Count)
-                numGames = possibleGames.Count;
-
             _gameSequence = new Minigame[numGames];
             for (int i = 0; i < numGames; i++)
             {
-                Minigame next = possibleGames[Random.Range(0, possibleGames.Count)];
-                _gameSequence[i] = next;
-                possibleGames.Remove(next);
+                _gameSequence[i] = gamePrefabs[Random.Range(0, gamePrefabs.Length)];
             }
 
             LoadNextMinigame();
@@ -61,6 +53,6 @@ namespace Managers
             _currentGameIndex = 0;
 
             MainCanvas.Instance.CloseMenu();
-        }   
+        }
     }
 }
