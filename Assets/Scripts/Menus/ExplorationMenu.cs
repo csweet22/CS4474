@@ -73,15 +73,18 @@ public class ExplorationMenu : ACMenu
             UpdateLabels();
         };
 
+        UpdateUndoRedoButtons();
         handleRight.onDragStart += () =>
         {
             ClearRedoStack();
             undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleRight, handleRight.transform.position));
+            UpdateUndoRedoButtons();
         };
         handleUp.onDragStart += () =>
         {
             ClearRedoStack();
             undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleUp, handleUp.transform.position));
+            UpdateUndoRedoButtons();
         };
 
         GenerateLines();
@@ -116,6 +119,7 @@ public class ExplorationMenu : ACMenu
         
         undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
         targetHandle.MoveVertex(newGlobalPosition);
+        UpdateUndoRedoButtons();
     }
 
     private void OnUndo()
@@ -128,12 +132,22 @@ public class ExplorationMenu : ACMenu
         
         redoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
         targetHandle.MoveVertex(newGlobalPosition);
+        UpdateUndoRedoButtons();
     }
 
+    private void UpdateUndoRedoButtons()
+    {
+        undoButton.interactable = undoStack.Count > 0;
+        redoButton.interactable = redoStack.Count > 0;
+    }
+    
     private void OnReset()
     {
         handleRight.MoveVertex(startingRightVertexGlobal);
         handleUp.MoveVertex(startingUpVertexGlobal);
+        undoStack.Clear();
+        redoStack.Clear();
+        UpdateUndoRedoButtons();
     }
 
     private void InitLabels()

@@ -1956,6 +1956,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3181297764317957686}
     m_Modifications:
+    - target: {fileID: 1095901556526207797, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3988495625612942631, guid: 4341f3d7f25862143a6a724756730b8a, type: 3}
       propertyPath: m_text
       value: Undo

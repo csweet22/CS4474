@@ -69,7 +69,7 @@ MonoBehaviour:
     review <i>Pythagorean theorem</i>.
 
 
-    Let''s start by create a profile for
+    Let''s start by creating a profile for
     you!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
