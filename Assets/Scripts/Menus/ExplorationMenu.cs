@@ -58,7 +58,7 @@ public class ExplorationMenu : ACMenu
         startingRightVertexGlobal = handleRight.transform.position;
         handleUp.transform.localPosition = upVertex;
         startingUpVertexGlobal = handleUp.transform.position;
-
+        
         handleRight.onPositionChanged += newPos =>
         {
             rightVertex = newPos;
