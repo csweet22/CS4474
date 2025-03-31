@@ -30,7 +30,7 @@ public class XPBar : ProgressBar
         float originalValue = Progress.Value;
         max.Value = ProgressionManager.Instance.RequiredXp;
         Progress.Value = ProgressionManager.Instance.Xp;
-        xpText.text = $"{Progress.Value} / {ProgressionManager.Instance.RequiredXp}";
+        xpText.text = $"{Progress.Value} / {ProgressionManager.Instance.RequiredXp} XP";
         ProgressUpdate(originalValue, Progress.Value);
     }
 }
