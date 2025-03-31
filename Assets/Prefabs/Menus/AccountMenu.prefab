@@ -267,8 +267,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Account
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
+  m_sharedMaterial: {fileID: -6326953334428982639, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -391,7 +391,9 @@ MonoBehaviour:
   resetButton: {fileID: 1264673653796063196}
   displayNameField: {fileID: 6239361494029471029}
   resetConfirmation: {fileID: 2166076989739614847, guid: 81ead3bd1fe8b1344849088900968dd4, type: 3}
+  pythagoreanExplanation: {fileID: 0}
   countryDropdown: {fileID: 3136429073464292754}
+  isOnboarding: 0
 --- !u!222 &5613477575075381516
 CanvasRenderer:
   m_ObjectHideFlags: 0
