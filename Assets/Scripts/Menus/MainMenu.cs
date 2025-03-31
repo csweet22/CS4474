@@ -10,17 +10,19 @@ using UnityEngine.UI;
 public class MainMenu : ACMenu
 {
     [SerializeField] private Button exploreButton;
-    [FormerlySerializedAs("explorerMenu")] [SerializeField] private GameObject exploreMenu;
-    
+
+    [FormerlySerializedAs("explorerMenu")] [SerializeField]
+    private GameObject exploreMenu;
+
     [SerializeField] private Button accountButton;
     [SerializeField] private GameObject accountMenu;
-    
+
     [SerializeField] private Button quizButton;
     [SerializeField] private GameObject quizMenu;
-    
+
     [SerializeField] private Button timedQuizButton;
     [SerializeField] private GameObject timedQuizMenu;
-    
+
     public override void Open()
     {
         base.Open();
@@ -35,7 +37,7 @@ public class MainMenu : ACMenu
     {
         base.Close();
     }
-    
+
     void OnEnable()
     {
         exploreButton.onClick.AddListener(OnExploreClicked);
@@ -43,9 +45,13 @@ public class MainMenu : ACMenu
         quizButton.onClick.AddListener(OnQuizClicked);
         timedQuizButton.onClick.AddListener(OnTimedQuizClicked);
 
+        accountButton.gameObject.GetComponentInChildren<RawImage>().texture =
+            AccountManager.Instance.ProfilePicture.Value;
+
         AccountManager.Instance.ProfilePicture.OnValueChanged += (texture2D, texture2D1) =>
         {
-            accountButton.gameObject.GetComponentInChildren<RawImage>().texture = texture2D1;
+            accountButton.gameObject.GetComponentInChildren<RawImage>().texture =
+                AccountManager.Instance.ProfilePicture.Value;
         };
     }
 
@@ -58,12 +64,12 @@ public class MainMenu : ACMenu
     {
         MainCanvas.Instance.OpenMenu(exploreMenu, Vector3.up);
     }
-    
+
     private void OnQuizClicked()
     {
         MainCanvas.Instance.OpenMenu(quizMenu, Vector3.down);
     }
-    
+
     private void OnTimedQuizClicked()
     {
         MainCanvas.Instance.OpenMenu(timedQuizMenu, Vector3.down);
