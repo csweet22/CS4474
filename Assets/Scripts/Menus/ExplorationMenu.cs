@@ -94,19 +94,22 @@ public class ExplorationMenu : ACMenu
             return;
 
         float rightValue = (float) Math.Round(_right.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        float rightValueSquared = rightValue * rightValue;
         rightLabel.text = rightValue.ToString($"F{decimalPlaces}");
 
         float upValue = (float) Math.Round(_up.rectTransform.sizeDelta.x / divisor, decimalPlaces);
+        float upValueSquared = upValue * upValue;
         upLabel.text = upValue.ToString($"F{decimalPlaces}");
 
         float hypoValue =
             (float) Math.Round(Mathf.Sqrt((rightValue * rightValue) + (upValue * upValue)), decimalPlaces);
+        float hypoValueSum = rightValueSquared + upValueSquared;
         hypoLabel.text = hypoValue.ToString($"F{decimalPlaces}");
         hypoLabel.rectTransform.rotation = Quaternion.identity;
 
-        hypoRectLabel.text = Math.Round((hypoValue * hypoValue), decimalPlaces).ToString($"F{decimalPlaces}");
-        rightRectLabel.text = Math.Round((rightValue * rightValue), decimalPlaces).ToString($"F{decimalPlaces}");
-        upRectLabel.text = Math.Round((upValue * upValue), decimalPlaces).ToString($"F{decimalPlaces}");
+        hypoRectLabel.text = Math.Round(hypoValueSum, decimalPlaces).ToString($"F{decimalPlaces}");
+        rightRectLabel.text = Math.Round(rightValueSquared, decimalPlaces).ToString($"F{decimalPlaces}");
+        upRectLabel.text = Math.Round(upValueSquared, decimalPlaces).ToString($"F{decimalPlaces}");
         
         hypoRectLabel.transform.rotation = Quaternion.identity;
         rightRectLabel.transform.rotation = Quaternion.identity;
@@ -125,7 +128,7 @@ public class ExplorationMenu : ACMenu
 
         pythaLabel.text +=
             $"\n<color=red>{rightValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> + <color=green>{upValue.ToString($"F{decimalPlaces}")}<sup>2</sup></color> = <color=blue>" +
-            $"{Math.Round((hypoValue * hypoValue), decimalPlaces).ToString($"F{decimalPlaces}")}" + "</color>";
+            $"{Math.Round(hypoValueSum, decimalPlaces).ToString($"F{decimalPlaces}")}" + "</color>";
         pythaLabel.text +=
             $"\n \u221a(<color=red>{(rightValue * rightValue).ToString($"F{decimalPlaces}")}</color> + <color=green>{(upValue * upValue).ToString($"F{decimalPlaces}")}</color>) = <color=blue>{hypoValue.ToString($"F{decimalPlaces}")}</color>";
     }
