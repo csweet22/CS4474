@@ -13,6 +13,8 @@ namespace Managers
         private Minigame[] _gameSequence;
         private int _currentGameIndex = 0;
 
+        private ContinuityBar _continuityBar;
+
         public Minigame CurrentGame { get; private set; } = null;
 
         public void StartQuiz(Transform root = null)
@@ -20,8 +22,11 @@ namespace Managers
             this.root = root ? root : transform;
 
             _gameSequence = new Minigame[numGames];
-            for (int i = 0; i < numGames; i++)
-            {
+
+            _continuityBar = FindObjectOfType<ContinuityBar>();
+            _continuityBar.Init(numGames);
+
+            for (int i = 0; i < numGames; i++){
                 _gameSequence[i] = gamePrefabs[Random.Range(0, gamePrefabs.Length)];
             }
 
@@ -30,18 +35,16 @@ namespace Managers
 
         public void LoadNextMinigame()
         {
-            if (_currentGameIndex < numGames)
-            {
-                if (CurrentGame)
-                {
+            _continuityBar.CompleteTo(_currentGameIndex);
+            if (_currentGameIndex < numGames){
+                if (CurrentGame){
                     Destroy(CurrentGame.gameObject);
                 }
 
                 CurrentGame = Instantiate(_gameSequence[_currentGameIndex], root);
                 _currentGameIndex++;
             }
-            else
-            {
+            else{
                 EndQuiz();
             }
         }
