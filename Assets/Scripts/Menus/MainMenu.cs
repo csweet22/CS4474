@@ -17,11 +17,8 @@ public class MainMenu : ACMenu
     [SerializeField] private Button accountButton;
     [SerializeField] private GameObject accountMenu;
 
-    [SerializeField] private Button quizButton;
-    [SerializeField] private GameObject quizMenu;
-
-    [SerializeField] private Button timedQuizButton;
-    [SerializeField] private GameObject timedQuizMenu;
+    [FormerlySerializedAs("quizButton")] [SerializeField] private Button quizSelectButton;
+    [FormerlySerializedAs("quizMenu")] [SerializeField] private GameObject quizSelectMenu;
 
     public override void Open()
     {
@@ -42,8 +39,7 @@ public class MainMenu : ACMenu
     {
         exploreButton.onClick.AddListener(OnExploreClicked);
         accountButton.onClick.AddListener(OnAccountClicked);
-        quizButton.onClick.AddListener(OnQuizClicked);
-        timedQuizButton.onClick.AddListener(OnTimedQuizClicked);
+        quizSelectButton.onClick.AddListener(OnQuizClicked);
 
         accountButton.gameObject.GetComponentInChildren<RawImage>().texture =
             AccountManager.Instance.ProfilePicture.Value;
@@ -67,19 +63,13 @@ public class MainMenu : ACMenu
 
     private void OnQuizClicked()
     {
-        MainCanvas.Instance.OpenMenu(quizMenu, Vector3.down);
-    }
-
-    private void OnTimedQuizClicked()
-    {
-        MainCanvas.Instance.OpenMenu(timedQuizMenu, Vector3.down);
+        MainCanvas.Instance.OpenMenu(quizSelectMenu, Vector3.down);
     }
 
     private void OnDisable()
     {
         exploreButton.onClick.RemoveAllListeners();
         accountButton.onClick.RemoveAllListeners();
-        quizButton.onClick.RemoveAllListeners();
-        timedQuizButton.onClick.RemoveAllListeners();
+        quizSelectButton.onClick.RemoveAllListeners();
     }
 }
