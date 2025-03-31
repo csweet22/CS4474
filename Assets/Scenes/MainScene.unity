@@ -174,10 +174,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: QuizManager
       objectReference: {fileID: 0}
-    - target: {fileID: 8162972301182069290, guid: 4c520bb4dc42733468116c5564372f0a, type: 3}
-      propertyPath: numGames
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -438,6 +434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4957801321358259426, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 6439909874736326225, guid: f7c57eda610f2e840ba80ab02213cddf, type: 3}
     - target: {fileID: 6368902350760024390, guid: 6eb882be35087e64fbdb8ebd119bdca0, type: 3}
       propertyPath: m_Camera
       value: 

@@ -17,7 +17,11 @@ public class AccountMenu : ACMenu
 
     [SerializeField] private GameObject resetConfirmation;
 
+    [SerializeField] private GameObject pythagoreanExplanation;
+
     [SerializeField] private TMP_Dropdown countryDropdown;
+
+    [SerializeField] private bool isOnboarding = false;
 
     public override void Open()
     {
@@ -32,18 +36,20 @@ public class AccountMenu : ACMenu
         displayNameField.onValueChanged.AddListener(OnDisplayNameChanged);
         backButton.onClick.AddListener(OnBackClicked);
 
-        resetButton.onClick.AddListener(OnResetClicked);
-        
+        if (resetButton)
+            resetButton.onClick.AddListener(OnResetClicked);
+
         var countryEnumValues = Enum.GetValues(typeof(Country)).Cast<Country>();
         var options = new List<TMP_Dropdown.OptionData>();
         foreach (var country in countryEnumValues){
             var description = GetEnumDescription(country);
             options.Add(new TMP_Dropdown.OptionData(description));
         }
+
         countryDropdown.AddOptions(options);
         countryDropdown.onValueChanged.AddListener(OnCountrySelected);
-        
-        countryDropdown.value = (int)AccountManager.Instance.UserCountry.Value;
+
+        countryDropdown.value = (int) AccountManager.Instance.UserCountry.Value;
 
         AccountManager.Instance.UserCountry.OnValueChanged += (s, a) =>
         {
@@ -53,7 +59,7 @@ public class AccountMenu : ACMenu
 
     private void OnCountrySelected(int arg0)
     {
-        AccountManager.Instance.SetUserCountry((Country)arg0);
+        AccountManager.Instance.SetUserCountry((Country) arg0);
     }
 
     private string GetEnumDescription(Country country)
@@ -85,7 +91,12 @@ public class AccountMenu : ACMenu
 
     private void OnBackClicked()
     {
-        MainCanvas.Instance.CloseMenu();
+        if (isOnboarding){
+            MainCanvas.Instance.OpenMenu(pythagoreanExplanation, Vector3.right);
+        }
+        else{
+            MainCanvas.Instance.CloseMenu();
+        }
     }
 
     public override void Close()
