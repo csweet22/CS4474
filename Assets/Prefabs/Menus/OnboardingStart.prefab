@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Welcome to <b>Pythagoren Learn</b>! This is an app to help to learn and
+  m_text: 'Welcome to <b>Pythagorean Learn</b>! This is an app to help to learn and
     review <i>Pythagorean theorem</i>.
 
 
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to <b>Pythagoren Learn</b>
+  m_text: Welcome to <b>Pythagorean Learn</b>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
   m_sharedMaterial: {fileID: -6326953334428982639, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
