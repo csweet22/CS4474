@@ -40,12 +40,21 @@ public class ExplorationMenu : ACMenu
 
     [SerializeField] private TextMeshProUGUI pythaLabel;
 
+    [SerializeField] private Button resetButton;
+    [SerializeField] private Button undoButton;
+    [SerializeField] private Button redoButton;
+
+    private Vector3 startingRightVertexGlobal;
+    private Vector3 startingUpVertexGlobal;
+    
     public override void Open()
     {
         base.Open();
 
         handleRight.transform.localPosition = rightVertex;
+        startingRightVertexGlobal = handleRight.transform.position;
         handleUp.transform.localPosition = upVertex;
+        startingUpVertexGlobal = handleUp.transform.position;
 
         handleRight.onPositionChanged += newPos =>
         {
@@ -76,6 +85,22 @@ public class ExplorationMenu : ACMenu
         UpdateRect(_hypotenuse);
         
         InitLabels();
+    }
+
+    private void OnRedo()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnUndo()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void OnReset()
+    {
+        handleRight.MoveVertex(startingRightVertexGlobal);
+        handleUp.MoveVertex(startingUpVertexGlobal);
     }
 
     private void InitLabels()
@@ -233,6 +258,9 @@ public class ExplorationMenu : ACMenu
     private void OnEnable()
     {
         backButton.onClick.AddListener(OnBackClicked);
+        resetButton.onClick.AddListener(OnReset);
+        undoButton.onClick.AddListener(OnUndo);
+        redoButton.onClick.AddListener(OnRedo);
     }
 
     private void OnBackClicked()
@@ -243,5 +271,8 @@ public class ExplorationMenu : ACMenu
     private void OnDisable()
     {
         backButton.onClick.RemoveAllListeners();
+        resetButton.onClick.RemoveAllListeners();
+        undoButton.onClick.RemoveAllListeners();
+        redoButton.onClick.RemoveAllListeners();
     }
 }

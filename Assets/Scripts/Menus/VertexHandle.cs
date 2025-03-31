@@ -75,7 +75,38 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             rt.rotation = _rt.rotation;
         }
     }
+    
+    public void MoveVertex(Vector3 globalPosition)
+    {
+        var rt = GetComponent<RectTransform>();
+        if (!freezeX)
+            rt.position = rt.position.Change(x: globalPosition.x);
+        if (!freezeY)
+            rt.position = rt.position.Change(y: globalPosition.y);
+        if (!freezeZ)
+            rt.position = rt.position.Change(z: globalPosition.z);
 
+        if (minPosition){
+            if (rt.position.x < minPosition.position.x)
+                rt.position = rt.position.Change(x: minPosition.position.x);
+            if (rt.position.y < minPosition.position.y)
+                rt.position = rt.position.Change(y: minPosition.position.y);
+            if (rt.position.z < minPosition.position.z)
+                rt.position = rt.position.Change(z: minPosition.position.z);
+        }
+
+        if (maxPosition){
+            if (rt.position.x > maxPosition.position.x)
+                rt.position = rt.position.Change(x: maxPosition.position.x);
+            if (rt.position.y > maxPosition.position.y)
+                rt.position = rt.position.Change(y: maxPosition.position.y);
+            if (rt.position.z > maxPosition.position.z)
+                rt.position = rt.position.Change(z: maxPosition.position.z);
+        }
+
+        if (onPositionChanged != null) onPositionChanged.Invoke(rt.localPosition);
+    }
+    
     public void OnEndDrag(PointerEventData eventData)
     {
     }
