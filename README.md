@@ -20,4 +20,6 @@ The prototype uses *Unity 2022.3.46f1*, and requires that Unity Editor version t
 ## Final Notes
 If you have any questions, please do not hesitate to ask.
 
+The app was also built with 1920 x 1080 resolutions in mind (16:9), and that will result in the smoothest experience.
+
 Thank you!
