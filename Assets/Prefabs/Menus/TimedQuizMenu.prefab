@@ -434,6 +434,7 @@ MonoBehaviour:
   backButton: {fileID: 5686645773078510028}
   hintButton: {fileID: 3355106090354499515}
   hintText: {fileID: 5643191470581225730}
+  exitConfirmation: {fileID: 4897532498451993151, guid: ec62741b28958c74ba286f8e811c28ff, type: 3}
 --- !u!114 &1365488939554962326
 MonoBehaviour:
   m_ObjectHideFlags: 0

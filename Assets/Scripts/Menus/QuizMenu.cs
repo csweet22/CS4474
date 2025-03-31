@@ -7,6 +7,8 @@ public class QuizMenu : ACMenu
     [SerializeField] private Button hintButton;
     [SerializeField] private GameObject hintText;
 
+    [SerializeField] private GameObject exitConfirmation;
+
     public override void Open()
     {
         base.Open();
@@ -21,7 +23,9 @@ public class QuizMenu : ACMenu
 
     private void OnBackClicked()
     {
-        Managers.QuizManager.Instance.EndQuiz();
+        GameObject confirmation = Instantiate(exitConfirmation, transform);
+        ConfirmationPopup confirmationPopup = confirmation.GetComponent<ConfirmationPopup>();
+        confirmationPopup.OnConfirm += () => Managers.QuizManager.Instance.EndQuiz();
     }
     
     private void OnHintClicked()
