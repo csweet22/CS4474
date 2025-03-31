@@ -17,6 +17,8 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     [SerializeField] private Transform minPosition, maxPosition;
 
     public event Action<Vector3> onPositionChanged;
+    public event Action onDragStart;
+    public event Action onDragEnded;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -29,6 +31,8 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             _rt = transform as RectTransform;
         else
             _rt = canvas.transform as RectTransform;
+
+        onDragStart?.Invoke();
 
         SetDraggedPosition(eventData);
     }
@@ -75,7 +79,7 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
             rt.rotation = _rt.rotation;
         }
     }
-    
+
     public void MoveVertex(Vector3 globalPosition)
     {
         var rt = GetComponent<RectTransform>();
@@ -104,11 +108,14 @@ public class VertexHandle : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
                 rt.position = rt.position.Change(z: maxPosition.position.z);
         }
 
-        if (onPositionChanged != null) onPositionChanged.Invoke(rt.localPosition);
+        if (onPositionChanged != null)
+            onPositionChanged.Invoke(rt.localPosition);
     }
-    
+
+
     public void OnEndDrag(PointerEventData eventData)
     {
+        onDragEnded?.Invoke();
     }
 
     private static T FindInParents<T>(GameObject go) where T : Component

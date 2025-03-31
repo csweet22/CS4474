@@ -46,7 +46,10 @@ public class ExplorationMenu : ACMenu
 
     private Vector3 startingRightVertexGlobal;
     private Vector3 startingUpVertexGlobal;
-    
+
+    private Stack<KeyValuePair<VertexHandle, Vector3>> undoStack = new Stack<KeyValuePair<VertexHandle, Vector3>>();
+    private Stack<KeyValuePair<VertexHandle, Vector3>> redoStack = new Stack<KeyValuePair<VertexHandle, Vector3>>();
+
     public override void Open()
     {
         base.Open();
@@ -70,31 +73,61 @@ public class ExplorationMenu : ACMenu
             UpdateLabels();
         };
 
+        handleRight.onDragStart += () =>
+        {
+            ClearRedoStack();
+            undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleRight, handleRight.transform.position));
+        };
+        handleUp.onDragStart += () =>
+        {
+            ClearRedoStack();
+            undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleUp, handleUp.transform.position));
+        };
+
         GenerateLines();
-        
+
         GenerateRect(_right, "rightRect", true);
         GenerateRect(_up, "upRect");
         GenerateRect(_hypotenuse, "hypoRect");
-        
+
         UpdateLines();
         UpdateLabels();
-        
+
 
         UpdateRect(_right);
         UpdateRect(_up);
         UpdateRect(_hypotenuse);
-        
+
         InitLabels();
+    }
+
+    private void ClearRedoStack()
+    {
+        redoStack.Clear();
     }
 
     private void OnRedo()
     {
-        throw new NotImplementedException();
+        if (redoStack.Count < 1)
+            return;
+        KeyValuePair<VertexHandle, Vector3> kvp = redoStack.Pop();
+        VertexHandle targetHandle = kvp.Key;
+        Vector3 newGlobalPosition = kvp.Value;
+        
+        undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
+        targetHandle.MoveVertex(newGlobalPosition);
     }
 
     private void OnUndo()
     {
-        throw new NotImplementedException();
+        if (undoStack.Count < 1)
+            return;
+        KeyValuePair<VertexHandle, Vector3> kvp = undoStack.Pop();
+        VertexHandle targetHandle = kvp.Key;
+        Vector3 newGlobalPosition = kvp.Value;
+        
+        redoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
+        targetHandle.MoveVertex(newGlobalPosition);
     }
 
     private void OnReset()
@@ -135,19 +168,19 @@ public class ExplorationMenu : ACMenu
         hypoRectLabel.text = Math.Round(hypoValueSum, decimalPlaces).ToString($"F{decimalPlaces}");
         rightRectLabel.text = Math.Round(rightValueSquared, decimalPlaces).ToString($"F{decimalPlaces}");
         upRectLabel.text = Math.Round(upValueSquared, decimalPlaces).ToString($"F{decimalPlaces}");
-        
+
         hypoRectLabel.transform.rotation = Quaternion.identity;
         rightRectLabel.transform.rotation = Quaternion.identity;
         upRectLabel.transform.rotation = Quaternion.identity;
-        
+
         hypoRectLabel.transform.SetParent(_hypotenuse.rect.transform);
         rightRectLabel.transform.SetParent(_right.rect.transform);
         upRectLabel.transform.SetParent(_up.rect.transform);
-        
+
         hypoRectLabel.transform.localPosition = Vector3.zero.Change(y: _hypotenuse.rectTransform.sizeDelta.x / 2f);
         rightRectLabel.transform.localPosition = Vector3.zero.Change(y: -_right.rectTransform.sizeDelta.x / 2f);
         upRectLabel.transform.localPosition = Vector3.zero.Change(y: _up.rectTransform.sizeDelta.x / 2f);
-        
+
         pythaLabel.text =
             "<color=red>a<sup>2</sup></color> + <color=green>b<sup>2</sup></color> = <color=blue>c<sup>2</sup></color>";
 
@@ -186,7 +219,7 @@ public class ExplorationMenu : ACMenu
         line.rect = rect;
 
         rect.AddComponent<Image>();
-        
+
         ((RectTransform) rect.transform).pivot = new Vector2(0.5f, flipped ? 1.0f : 0.0f);
     }
 
