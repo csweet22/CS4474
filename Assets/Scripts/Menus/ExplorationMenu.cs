@@ -50,6 +50,8 @@ public class ExplorationMenu : ACMenu
     private Stack<KeyValuePair<VertexHandle, Vector3>> undoStack = new Stack<KeyValuePair<VertexHandle, Vector3>>();
     private Stack<KeyValuePair<VertexHandle, Vector3>> redoStack = new Stack<KeyValuePair<VertexHandle, Vector3>>();
 
+    private bool dirty = false;
+    
     public override void Open()
     {
         base.Open();
@@ -58,6 +60,9 @@ public class ExplorationMenu : ACMenu
         startingRightVertexGlobal = handleRight.transform.position;
         handleUp.transform.localPosition = upVertex;
         startingUpVertexGlobal = handleUp.transform.position;
+        
+        handleRight.MoveVertex(startingRightVertexGlobal);
+        handleUp.MoveVertex(startingUpVertexGlobal);
         
         handleRight.onPositionChanged += newPos =>
         {
@@ -73,18 +78,20 @@ public class ExplorationMenu : ACMenu
             UpdateLabels();
         };
 
-        UpdateUndoRedoButtons();
+        UpdateButtons();
         handleRight.onDragStart += () =>
         {
             ClearRedoStack();
             undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleRight, handleRight.transform.position));
-            UpdateUndoRedoButtons();
+            dirty = true;
+            UpdateButtons();
         };
         handleUp.onDragStart += () =>
         {
             ClearRedoStack();
             undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(handleUp, handleUp.transform.position));
-            UpdateUndoRedoButtons();
+            dirty = true;
+            UpdateButtons();
         };
 
         GenerateLines();
@@ -119,7 +126,7 @@ public class ExplorationMenu : ACMenu
         
         undoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
         targetHandle.MoveVertex(newGlobalPosition);
-        UpdateUndoRedoButtons();
+        UpdateButtons();
     }
 
     private void OnUndo()
@@ -132,13 +139,14 @@ public class ExplorationMenu : ACMenu
         
         redoStack.Push(new KeyValuePair<VertexHandle, Vector3>(targetHandle, targetHandle.transform.position));
         targetHandle.MoveVertex(newGlobalPosition);
-        UpdateUndoRedoButtons();
+        UpdateButtons();
     }
 
-    private void UpdateUndoRedoButtons()
+    private void UpdateButtons()
     {
         undoButton.interactable = undoStack.Count > 0;
         redoButton.interactable = redoStack.Count > 0;
+        resetButton.interactable = dirty;
     }
     
     private void OnReset()
@@ -147,7 +155,8 @@ public class ExplorationMenu : ACMenu
         handleUp.MoveVertex(startingUpVertexGlobal);
         undoStack.Clear();
         redoStack.Clear();
-        UpdateUndoRedoButtons();
+        dirty = false;
+        UpdateButtons();
     }
 
     private void InitLabels()
