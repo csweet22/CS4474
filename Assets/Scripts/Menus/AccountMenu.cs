@@ -59,7 +59,8 @@ public class AccountMenu : ACMenu
     private void OnDisable()
     {
         backButton.onClick.RemoveAllListeners();
-        resetButton.onClick.RemoveAllListeners();
+        if (resetButton)
+            resetButton.onClick.RemoveAllListeners();
     }
 
     private void OnCountrySelected(int arg0)
@@ -76,6 +77,7 @@ public class AccountMenu : ACMenu
 
     private void OnResetClicked()
     {
+        resetButton.interactable = false;
         GameObject confirmation = Instantiate(resetConfirmation, transform);
         ConfirmationPopup confirmationPopup = confirmation.GetComponent<ConfirmationPopup>();
         confirmationPopup.OnConfirm += () =>
@@ -96,6 +98,7 @@ public class AccountMenu : ACMenu
 
     private void OnBackClicked()
     {
+        backButton.interactable = false;
         if (isOnboarding){
             MainCanvas.Instance.OpenMenu(pythagoreanExplanation, Vector3.right);
         }
