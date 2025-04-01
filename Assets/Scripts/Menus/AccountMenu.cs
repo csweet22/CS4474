@@ -23,9 +23,12 @@ public class AccountMenu : ACMenu
 
     [SerializeField] private bool isOnboarding = false;
 
-    public override void Open()
+    private void OnEnable()
     {
-        base.Open();
+        backButton.onClick.AddListener(OnBackClicked);
+
+        if (resetButton)
+            resetButton.onClick.AddListener(OnResetClicked);
 
         AccountManager.Instance.DisplayName.OnValueChanged += (s, s1) =>
         {
@@ -34,10 +37,6 @@ public class AccountMenu : ACMenu
 
         displayNameField.text = AccountManager.Instance.DisplayName.Value;
         displayNameField.onValueChanged.AddListener(OnDisplayNameChanged);
-        backButton.onClick.AddListener(OnBackClicked);
-
-        if (resetButton)
-            resetButton.onClick.AddListener(OnResetClicked);
 
         var countryEnumValues = Enum.GetValues(typeof(Country)).Cast<Country>();
         var options = new List<TMP_Dropdown.OptionData>();
@@ -55,6 +54,12 @@ public class AccountMenu : ACMenu
         {
             countryDropdown.value = (int) AccountManager.Instance.UserCountry.Value;
         };
+    }
+
+    private void OnDisable()
+    {
+        backButton.onClick.RemoveAllListeners();
+        resetButton.onClick.RemoveAllListeners();
     }
 
     private void OnCountrySelected(int arg0)
@@ -97,12 +102,5 @@ public class AccountMenu : ACMenu
         else{
             MainCanvas.Instance.CloseMenu();
         }
-    }
-
-    public override void Close()
-    {
-        base.Close();
-        backButton.onClick.RemoveAllListeners();
-        resetButton.onClick.RemoveAllListeners();
     }
 }
