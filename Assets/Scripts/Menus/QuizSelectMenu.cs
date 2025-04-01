@@ -13,6 +13,7 @@ public class QuizSelectMenu : ACMenu
 
     void OnEnable()
     {
+        backButton.interactable = true;
         backButton.onClick.AddListener(OnBackClicked);
         quizButton.onClick.AddListener(OnQuizClicked);
         timedQuizButton.onClick.AddListener(OnTimedQuizClicked);
@@ -20,6 +21,7 @@ public class QuizSelectMenu : ACMenu
     
     private void OnBackClicked()
     {
+        backButton.interactable = false;
         MainCanvas.Instance.CloseMenu();
     }
 

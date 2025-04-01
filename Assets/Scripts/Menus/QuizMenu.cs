@@ -17,12 +17,14 @@ public class QuizMenu : ACMenu
     
     private void OnEnable()
     {
+        backButton.interactable = true;
         backButton.onClick.AddListener(OnBackClicked);
         hintButton.onClick.AddListener(OnHintClicked);
     }
 
     private void OnBackClicked()
     {
+        backButton.interactable = false;
         GameObject confirmation = Instantiate(exitConfirmation, transform);
         ConfirmationPopup confirmationPopup = confirmation.GetComponent<ConfirmationPopup>();
         confirmationPopup.OnConfirm += () => Managers.QuizManager.Instance.EndQuiz();
