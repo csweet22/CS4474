@@ -65,27 +65,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'In <b>Pythagorean Learn</b>, there are 3 activities you can start from
+  m_text: 'In <b>Pythagorean Learn</b>, there are 2 activities you can start from
     the main menu:
 
     (1) Exploration Mode
 
     (2) Quiz Mode
 
-    (3) Timed Quiz
-    Mode
+
+    <b>Exploration
+    Mode</b>: Drag around two of the triangle''s vertices to see how side lengths
+    interact.
 
 
-    <b>Exploration Mode</b>: Drag around two of the triangle''s vertices
-    to see how side lengths interact.
-
-
-    <b>Quiz Mode</b>: Test your knowledge
-    by answering questions. Answering correctly gives you experience points!
-
-
-    <b>Timed
-    Quiz Mode</b>: A timed version of <b>Quiz Mode</b> to really test yourself.'
+    <b>Quiz Mode</b>: Test your knowledge by answering questions.
+    Answering correctly gives you experience points! Hard mode has a timer while
+    Easy mode does not.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
   m_sharedMaterial: {fileID: -6326953334428982639, guid: 2118c8961d0c86a479c70a2f93d048a7, type: 2}
