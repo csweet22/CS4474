@@ -14,20 +14,19 @@ public class AppExplanation : ACMenu
 
     [SerializeField] private GameObject mainMenu;
 
-    public override void Open()
+    private void OnEnable()
     {
-        base.Open();
         continueButton.onClick.AddListener(OnContinueClick);
+    }
+
+    private void OnDisable()
+    {
+        continueButton.onClick.RemoveAllListeners();
     }
 
     private void OnContinueClick()
     {
+        continueButton.interactable = false;
         MainCanvas.Instance.OpenMenu(mainMenu, Vector3.right);
-    }
-
-    public override void Close()
-    {
-        base.Close();
-        continueButton.onClick.RemoveAllListeners();
     }
 }

@@ -305,12 +305,6 @@ public class ExplorationMenu : ACMenu
         return lineRenderer;
     }
 
-
-    public override void Close()
-    {
-        base.Close();
-    }
-
     private void OnEnable()
     {
         backButton.onClick.AddListener(OnBackClicked);

@@ -26,12 +26,7 @@ public class PythagoreanExplanation : ACMenu
 
     private void OnContinueClick()
     {
+        continueButton.interactable = false;
         MainCanvas.Instance.OpenMenu(appExplanation, Vector3.right);
-    }
-
-    public override void Close()
-    {
-        base.Close();
-        continueButton.onClick.RemoveAllListeners();
     }
 }

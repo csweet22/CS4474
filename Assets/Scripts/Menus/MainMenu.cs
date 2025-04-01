@@ -19,22 +19,7 @@ public class MainMenu : ACMenu
 
     [FormerlySerializedAs("quizButton")] [SerializeField] private Button quizSelectButton;
     [FormerlySerializedAs("quizMenu")] [SerializeField] private GameObject quizSelectMenu;
-
-    public override void Open()
-    {
-        base.Open();
-    }
-
-    public override void Returned()
-    {
-        base.Returned();
-    }
-
-    public override void Close()
-    {
-        base.Close();
-    }
-
+    
     void OnEnable()
     {
         exploreButton.onClick.AddListener(OnExploreClicked);

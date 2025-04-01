@@ -18,11 +18,13 @@ public class OnboardingStart : ACMenu
 
     private void OnSkipClick()
     {
+        skipButton.interactable = false;
         MainCanvas.Instance.OpenMenu(pythagoreanExplanationMenu, Vector3.right);
     }
 
     private void OnProfileClick()
     {
+        profileButton.interactable = false;
         MainCanvas.Instance.OpenMenu(accountMenu, Vector3.right);
     }
 
@@ -34,13 +36,6 @@ public class OnboardingStart : ACMenu
 
     private void OnDisable()
     {
-        profileButton.onClick.RemoveAllListeners();
-        skipButton.onClick.RemoveAllListeners();
-    }
-
-    public override void Close()
-    {
-        base.Close();
         profileButton.onClick.RemoveAllListeners();
         skipButton.onClick.RemoveAllListeners();
     }
