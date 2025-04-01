@@ -38,16 +38,19 @@ public class MainMenu : ACMenu
 
     private void OnAccountClicked()
     {
+        accountButton.interactable = false;
         MainCanvas.Instance.OpenMenu(accountMenu, Vector3.left);
     }
 
     private void OnExploreClicked()
     {
+        exploreButton.interactable = false;
         MainCanvas.Instance.OpenMenu(exploreMenu, Vector3.up);
     }
 
     private void OnQuizClicked()
     {
+        quizSelectButton.interactable = false;
         MainCanvas.Instance.OpenMenu(quizSelectMenu, Vector3.down);
     }
 
