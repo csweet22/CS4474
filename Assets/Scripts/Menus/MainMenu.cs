@@ -22,6 +22,9 @@ public class MainMenu : ACMenu
     
     void OnEnable()
     {
+        exploreButton.interactable = true;
+        accountButton.interactable = true;
+        quizSelectButton.interactable = true;
         exploreButton.onClick.AddListener(OnExploreClicked);
         accountButton.onClick.AddListener(OnAccountClicked);
         quizSelectButton.onClick.AddListener(OnQuizClicked);
