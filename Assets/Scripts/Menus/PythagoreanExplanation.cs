@@ -14,10 +14,14 @@ public class PythagoreanExplanation : ACMenu
 
     [SerializeField] private GameObject appExplanation;
 
-    public override void Open()
+    private void OnEnable()
     {
-        base.Open();
         continueButton.onClick.AddListener(OnContinueClick);
+    }
+
+    private void OnDisable()
+    {
+        continueButton.onClick.RemoveAllListeners();
     }
 
     private void OnContinueClick()

@@ -12,17 +12,9 @@ public class OnboardingStart : ACMenu
 {
     [SerializeField] private Button profileButton;
     [SerializeField] private Button skipButton;
-    
+
     [SerializeField] private GameObject pythagoreanExplanationMenu;
     [SerializeField] private GameObject accountMenu;
-    
-    public override void Open()
-    {
-        base.Open();
-        
-        profileButton.onClick.AddListener(OnProfileClick);
-        skipButton.onClick.AddListener(OnSkipClick);
-    }
 
     private void OnSkipClick()
     {
@@ -32,6 +24,18 @@ public class OnboardingStart : ACMenu
     private void OnProfileClick()
     {
         MainCanvas.Instance.OpenMenu(accountMenu, Vector3.right);
+    }
+
+    private void OnEnable()
+    {
+        profileButton.onClick.AddListener(OnProfileClick);
+        skipButton.onClick.AddListener(OnSkipClick);
+    }
+
+    private void OnDisable()
+    {
+        profileButton.onClick.RemoveAllListeners();
+        skipButton.onClick.RemoveAllListeners();
     }
 
     public override void Close()
