@@ -77,7 +77,6 @@ public class AccountMenu : ACMenu
 
     private void OnResetClicked()
     {
-        resetButton.interactable = false;
         GameObject confirmation = Instantiate(resetConfirmation, transform);
         ConfirmationPopup confirmationPopup = confirmation.GetComponent<ConfirmationPopup>();
         confirmationPopup.OnConfirm += () =>

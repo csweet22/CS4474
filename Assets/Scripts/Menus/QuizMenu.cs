@@ -24,7 +24,6 @@ public class QuizMenu : ACMenu
 
     private void OnBackClicked()
     {
-        backButton.interactable = false;
         GameObject confirmation = Instantiate(exitConfirmation, transform);
         ConfirmationPopup confirmationPopup = confirmation.GetComponent<ConfirmationPopup>();
         confirmationPopup.OnConfirm += () => Managers.QuizManager.Instance.EndQuiz();
