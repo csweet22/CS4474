@@ -22,4 +22,6 @@ If you have any questions, please do not hesitate to ask.
 
 The app was also built with 1920 x 1080 resolutions in mind (16:9), and that will result in the smoothest experience.
 
+There is a video in the repo (source) showing off the prototype.
+
 Thank you!
