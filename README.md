@@ -2,6 +2,8 @@
 
 Welcome to the *Pythagorean Learn* GitHub Repository! This repo contains information on (1) how to run the prototype, (2) how to build the prototype from source, and (3) the prototype's source code.
 
+Demo Video: https://www.youtube.com/watch?v=l1JJq6cWao8
+
 The prototype uses *Unity 2022.3.46f1*, and requires that Unity Editor version to be built.
 
 ## How to run the prototype. 
